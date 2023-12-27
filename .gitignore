@@ -1,1 +1,29 @@
-node_modules
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/src/styles/css
+/src/styles/common/TestStyle.js
+
+/src/_dev_test
+
+# production
+/build
+
+# misc
+aws console.txt
+
+#env var
+.env
+
+#configurations
+ecosystem.config.js
+
+#logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# SSL
+localhost.pem
+localhost-key.pem

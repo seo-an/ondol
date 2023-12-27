@@ -3,6 +3,15 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+
+// const os = require('os');
+// const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+import os from 'os';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+
 import CopyPlugin from 'copy-webpack-plugin';
 
 
@@ -12,6 +21,20 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default merge(common, {
   mode: 'production',
+
+  module: {
+    rules: [
+      {
+        test: /\.s?[ca]ss$/,
+        exclude: /node_modules/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader'
+        ],
+      }
+    ]
+  },
 
   // 플러그인 설정
   plugins: [
@@ -23,15 +46,30 @@ export default merge(common, {
         removeComments: true,
       },
     }),
-    new CopyPlugin ({
-      patterns: [
-        {
-          from: 'public/css',
-          to: 'css'
-        } // from 폴더 안의 내용이 to로 복사되어 들어가도록 한다.
-      ]
-    })
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].[contenthash].css', // CSS 파일의 출력 경로와 이름, 본문에 import 된 css 파일을 자동으로 압축함
+    }),
+    // new CopyPlugin ({
+    //   patterns: [
+    //     {
+    //       from: 'public/css',
+    //       to: 'css'
+    //     } // from 폴더 안의 내용이 to로 복사되어 들어가도록 한다.
+    //   ]
+    // })
+
   ],
+
+  
+  optimization: {
+    // 압축
+    minimize: true,
+    // 미니마이저
+    minimizer: [
+      // 플러그인 인스턴스 생성
+      new CssMinimizerPlugin(),
+    ],
+  },
 
   // 출력 설정
   output: {

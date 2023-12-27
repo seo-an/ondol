@@ -11,6 +11,20 @@ export default merge(common, {
 
   devtool: 'inline-source-map', // 소스맵 설정
 
+  module: {
+    rules: [
+      {
+        test: /\.s?[ca]ss$/,
+        exclude: /node_modules/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader'
+        ],
+      }
+    ]
+  },
+
   // 개발 서버 설정
   devServer: {
     static: {
