@@ -6,6 +6,11 @@ export default {
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx']
   },
+
+  performance: {
+    maxAssetSize: 5242880, // 바이트 단위 (5MiB: 5 * 1,048,576 bytes)
+    hints: 'warning' // 'error', 'warning', 또는 false 중 선택
+  },
   
   module: {
     rules: [
@@ -14,33 +19,24 @@ export default {
         test: /\.[jt]sx?$/,
         loader: 'esbuild-loader',
         options: {
-          target: 'esnext',
-          minify: true
+          target: 'esnext', // 다른 빌더(ts)와 일치 시켜야 함
+          minify: true // 코드 압축
         }
       },
-      // {
-      //   test: /\.css$/,
-      //   use: [
-      //     {
-      //       loader: 'style-loader' // CSS를 DOM에 주입
-      //     },
-      //     {
-      //       loader: 'esbuild-loader',
-      //       options: {
-      //         loader: 'css', // esbuild의 CSS 로더 사용
-      //         minify: true  // CSS 압축 활성화
-      //       }
-      //     }
-      //   ]
-      // },
-      // {
-      //   test: /\.scss$/,
-      //   use: [
-      //     'style-loader', // 3. DOM에 스타일 삽입
-      //     'css-loader',   // 2. CSS를 CommonJS로 변환
-      //     'sass-loader'   // 1. Sass를 CSS로 컴파일
-      //   ]
-      // }
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[name].[contenthash][ext]', // 폰트 파일 저장 위치 및 이름 설정
+        },
+      },
+      {
+        test: /\.(jpg|jpeg|gif|bmp|png|tiff|tif|ico|svg|webp|heif|heic|raw|arw|cr2)$/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'media/image/[name].[contenthash][ext]', // 이미지 저장 위치 및 이름 설정
+        },
+      }
     ]
   }
 };

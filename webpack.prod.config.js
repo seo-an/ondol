@@ -26,13 +26,13 @@ export default merge(common, {
     rules: [
       {
         test: /\.s?[ca]ss$/,
-        exclude: /node_modules/,
+        exclude: [/node_modules/],
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
           'sass-loader'
         ],
-      }
+      },
     ]
   },
 
@@ -46,18 +46,21 @@ export default merge(common, {
         removeComments: true,
       },
     }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'public', 'error.html'),
+      filename: 'error.html'
+    }),
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash].css', // CSS 파일의 출력 경로와 이름, 본문에 import 된 css 파일을 자동으로 압축함
     }),
     // new CopyPlugin ({
     //   patterns: [
     //     {
-    //       from: 'public/css',
-    //       to: 'css'
+    //       from: 'public/fonts',
+    //       to: 'fonts'
     //     } // from 폴더 안의 내용이 to로 복사되어 들어가도록 한다.
     //   ]
     // })
-
   ],
 
   

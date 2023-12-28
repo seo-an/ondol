@@ -5,7 +5,7 @@ import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-// import envSetting from './env.js'; // env.js를 env.ts로 변경하고 export default를 사용해야 함
+import envSetting from './env.js'; // env.js를 env.ts로 변경하고 export default를 사용해야 함
 // import externalRequestTo from './https-request.js'; // https-request.js를 https-request.ts로 변경하고 export default를 사용해야 함
 // import { pool, getConnect, postConnect, deleteConnect } from './database.js'; 
 
@@ -18,8 +18,7 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 // Node.js express server용 port
-// const PORT = envSetting.NODE_SERVER_PORT || 1991;
-const PORT = 8573;
+const PORT = envSetting.NODE_SERVER_PORT || 1991;
 
 // json body parser
 app.use(express.json());
