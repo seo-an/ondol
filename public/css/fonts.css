@@ -102,23 +102,23 @@
 
 /* default 폰트 스타일 정의 */
 @font-face {
-  font-family: 'seoanCocktail';
+  font-family: 'seoanCocktailBomb';
   font-style: normal;
   font-weight: 200;
-  src: local('seoanCocktail'), url('../fonts/KoPubWorld Dotum Light.woff2') format('woff2');
+  src: local('seoanCocktailBomb'), url('../fonts/KoPubWorld Dotum Light.woff2') format('woff2');
 	font-display: swap;
 }
 @font-face {
-  font-family: 'seoanCocktail';
+  font-family: 'seoanCocktailBomb';
   font-style: normal;
   font-weight: 400;
-  src: local('seoanCocktail'), url('../fonts/KoPubWorld Dotum Medium.woff2') format('woff2');
+  src: local('seoanCocktailBomb'), url('../fonts/KoPubWorld Dotum Medium.woff2') format('woff2');
 	font-display: swap;
 }
 @font-face {
-  font-family: 'seoanCocktail';
+  font-family: 'seoanCocktailBomb';
   font-style: normal;
-  font-weight: 400;
-  src: local('seoanCocktail'), url('../fonts/KoPubWorld Dotum Bold.woff2') format('woff2');
+  font-weight: 700;
+  src: local('seoanCocktailBomb'), url('../fonts/KoPubWorld Dotum Bold.woff2') format('woff2');
 	font-display: swap;
 }

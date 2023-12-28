@@ -22,13 +22,14 @@ export default merge(common, {
         test: /\.s?[ca]ss$/,
         exclude: [/node_modules/],
         use: [
-          MiniCssExtractPlugin.loader,
+          // MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader',
+            loader: MiniCssExtractPlugin.loader,
             options: {
-              url: false // url() 함수를 해석하지 않음
-            }
+              publicPath: '../' // 상대 경로 설정
+            },
           },
+          'css-loader',
           'sass-loader'
         ],
       },

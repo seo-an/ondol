@@ -32,6 +32,7 @@ export default {
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
         type: 'asset/resource',
+        include: path.resolve(__dirname, 'public/fonts'),
         generator: {
           filename: 'fonts/[name][ext]', // 폰트 파일 저장 위치 및 이름 설정
         },
