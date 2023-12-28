@@ -18,6 +18,7 @@ aws console.txt
 
 #configurations
 ecosystem.config.js
+ecosystem.config.cjs
 
 #logs
 npm-debug.log*
