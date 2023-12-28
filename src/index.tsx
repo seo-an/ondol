@@ -1,7 +1,8 @@
 import React from 'react';
 import * as ReactDOMClient from 'react-dom/client';
 
-import '../public/css/style.css';
+import '../public/css/global-style.css';
+import '../public/css/modal.css';
 import '../public/css/fonts.css';
 
 import App from './App';

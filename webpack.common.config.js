@@ -1,3 +1,8 @@
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 export default {
   // 진입점 설정
   entry: './src/index.tsx', // TypeScript 진입 파일
@@ -19,6 +24,7 @@ export default {
         test: /\.[jt]sx?$/,
         loader: 'esbuild-loader',
         options: {
+          loader: 'tsx', // JSX 문법을 사용하는 TypeScript 파일 처리
           target: 'esnext', // 다른 빌더(ts)와 일치 시켜야 함
           minify: true // 코드 압축
         }
@@ -27,16 +33,21 @@ export default {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
         type: 'asset/resource',
         generator: {
-          filename: 'fonts/[name].[contenthash][ext]', // 폰트 파일 저장 위치 및 이름 설정
+          filename: 'fonts/[name][ext]', // 폰트 파일 저장 위치 및 이름 설정
         },
       },
       {
-        test: /\.(jpg|jpeg|gif|bmp|png|tiff|tif|ico|svg|webp|heif|heic|raw|arw|cr2)$/,
+        test: /\.(jpg|jpeg|gif|bmp|png|tiff|tif|svg|ico|webp|heif|heic|raw|arw|cr2)$/,
         type: 'asset/resource',
+        include: path.resolve(__dirname, 'src/assets/icon'),
         generator: {
-          filename: 'media/image/[name].[contenthash][ext]', // 이미지 저장 위치 및 이름 설정
+          filename: 'media/icon/[name].[contenthash][ext]', // 이미지 저장 위치 및 이름 설정
         },
-      }
+      },
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack'] // svg를 컴포넌트로 사용가능하게 함
+      },
     ]
   }
 };

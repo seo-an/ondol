@@ -4,16 +4,10 @@ import { fileURLToPath } from 'url';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
-// const os = require('os');
-// const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
-import os from 'os';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-import CopyPlugin from 'copy-webpack-plugin';
-
+// import CopyPlugin from 'copy-webpack-plugin';
 
 import common from './webpack.common.config.js';
 
@@ -29,7 +23,12 @@ export default merge(common, {
         exclude: [/node_modules/],
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              url: false // url() 함수를 해석하지 않음
+            }
+          },
           'sass-loader'
         ],
       },
@@ -78,6 +77,6 @@ export default merge(common, {
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.min.js',
-    publicPath: '/',
+    publicPath: './',
   }
 });
