@@ -4,6 +4,7 @@
   "description": "2012-12-28 이사 완료",
   "type": "module",
   "scripts": {
+    "check": "tsc --noEmit",
     "build": "webpack --config ./webpack.prod.config.js --mode production",
     "dev": "webpack-dev-server --config ./webpack.dev.config.js --mode development"
   },
