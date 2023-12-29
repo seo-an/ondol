@@ -2,9 +2,6 @@
 
 # dependencies
 /node_modules
-/src/styles/css
-/src/styles/common/TestStyle.js
-
 /src/_dev_test
 
 # production
