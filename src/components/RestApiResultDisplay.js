@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
-import { GrayButtonWithSolidBorder as Button } from '../../../styles/common/Button.js';
-import { Pagination } from '../../../utils/pagination.js';
+import { GrayButtonWithSolidBorder as Button } from '../styles/common/Button.js';
+import { Pagination } from '../utils/pagination.js';
 
 
 export const Container = styled.div `

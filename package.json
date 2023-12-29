@@ -1,7 +1,7 @@
 {
   "name": "ondol",
-  "version": "0.1.0",
-  "description": "2012-12-28 이사 완료",
+  "version": "0.2.0",
+  "description": "2012-12-29 폴더 구조 변경 작업중",
   "type": "module",
   "scripts": {
     "check": "tsc --noEmit",

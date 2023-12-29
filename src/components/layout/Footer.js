@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 
-import { copyToClipboard } from '../../../utils/copyToClipboard.js';
+import { copyToClipboard } from '../../utils/copyToClipboard.js';
 
 
 export const Container = styled.footer `

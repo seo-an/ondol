@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-import { getValue } from '../../action/actionsForRestApi.js';
+import { getValue } from '../models/actionsForRestApi.js';
 
-import { PapagoTransForm } from '../../view/pages/PapagoTransForm.js';
-import { PapagoTransDisplay } from '../../view/pages/PapagoTransDisplay.js';
+import { PapagoTransForm } from '../components/PapagoTransForm.js';
+import { PapagoTransDisplay } from '../components/PapagoTransDisplay.js';
 
 
 export const PapagoTransJS = () => {

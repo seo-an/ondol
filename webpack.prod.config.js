@@ -1,13 +1,14 @@
-import { merge } from 'webpack-merge';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import dotenv from 'dotenv';
+dotenv.config();
+import webpack from 'webpack';
+import { merge } from 'webpack-merge';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-
-// import CopyPlugin from 'copy-webpack-plugin';
 
 import common from './webpack.common.config.js';
 
@@ -53,14 +54,9 @@ export default merge(common, {
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash].css', // CSS 파일의 출력 경로와 이름, 본문에 import 된 css 파일을 자동으로 압축함
     }),
-    // new CopyPlugin ({
-    //   patterns: [
-    //     {
-    //       from: 'public/fonts',
-    //       to: 'fonts'
-    //     } // from 폴더 안의 내용이 to로 복사되어 들어가도록 한다.
-    //   ]
-    // })
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(process.env), // 환경변수 사용
+    }),
   ],
 
   
@@ -78,6 +74,6 @@ export default merge(common, {
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.min.js',
-    publicPath: './',
+    publicPath: '/',
   }
 });

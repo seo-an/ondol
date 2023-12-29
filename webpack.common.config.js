@@ -1,6 +1,8 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+// import CopyPlugin from 'copy-webpack-plugin';
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default {
@@ -38,11 +40,11 @@ export default {
         },
       },
       {
-        test: /\.(jpg|jpeg|gif|bmp|png|tiff|tif|svg|ico|webp|heif|heic|raw|arw|cr2)$/,
+        test: /\.(jpg|jpeg|gif|bmp|png|tiff|tif|ico|webp|heif|heic|raw|arw|cr2)$/,
         type: 'asset/resource',
         include: path.resolve(__dirname, 'src/assets/icon'),
         generator: {
-          filename: 'media/icon/[name].[contenthash][ext]', // 이미지 저장 위치 및 이름 설정
+          filename: 'media/icon/[name][ext]', // 이미지 저장 위치 및 이름 설정
         },
       },
       {
@@ -50,5 +52,16 @@ export default {
         use: ['@svgr/webpack'] // svg를 컴포넌트로 사용가능하게 함
       },
     ]
-  }
+  },
+
+  // plugins: [
+  //   new CopyPlugin ({
+  //     patterns: [
+  //       {
+  //         from: 'src/assets/image',
+  //         to: 'media/images'
+  //       } // from 폴더 안의 내용이 to로 복사되어 들어가도록 한다.
+  //     ]
+  //   })
+  // ]
 };

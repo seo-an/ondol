@@ -1,12 +1,12 @@
 import { useState, useMemo } from 'react';
 
-import AIRLINES_INFO from '../data/airlines_info.json';
+import AIRLINES_INFO from '../models/data/airlines_info.json';
 
-import { requestDataFromFlightApi as callApiData } from '../../action/requestDataFromFlightApi.js';
-import { findAirline, findAirport } from '../../action/actionsForFlightApi.js';
+import { requestDataFromFlightApi as callApiData } from '../models/requestDataFromFlightApi.js';
+import { findAirline, findAirport } from '../models/actionsForFlightApi.js';
 
-import FlightApiSearchForm from '../../view/pages/FlightApiSearchForm.js';
-import FlightApiResultDisplay from '../../view/pages/FlightApiResultDisplay.js';
+import FlightApiSearchForm from '../components/FlightApiSearchForm.js';
+import FlightApiResultDisplay from '../components/FlightApiResultDisplay.js';
 
 
 const FlightApiJs = () => {

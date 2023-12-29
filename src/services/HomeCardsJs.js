@@ -1,4 +1,4 @@
-import { HomeCardsView } from '../../view/pages/HomeCardsView.js';
+import { HomeCardsView } from '../components/HomeCardsView.js';
 
 export const HomeCardsJs = () => {
 	const data = [

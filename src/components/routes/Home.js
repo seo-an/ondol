@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { HomeCardsJs as CardContents } from '../../components/component/HomeCardsJs.js';
+import { HomeCardsJs as CardContents } from '../../services/HomeCardsJs.js';
 
 
 export const Body = styled.div `

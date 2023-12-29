@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { GrayButtonWithSolidBorder as Button } from '../../../styles/common/Button.js';
+import { GrayButtonWithSolidBorder as Button } from '../styles/common/Button.js';
 
 export const Container = styled.div `
   display: flex;

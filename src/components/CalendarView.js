@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { CalendarReactJsPowered as reactCalendar } from '../../components/component/CalendarReactJsPowered.js';
+import { CalendarReactJsPowered as reactCalendar } from '../services/CalendarReactJsPowered.js';
 
 export const colorSun = '#ef6464';
 export const colorSat = '#5252eb';

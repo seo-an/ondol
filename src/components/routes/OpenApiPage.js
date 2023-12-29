@@ -1,4 +1,4 @@
-import { PapagoTransJS } from '../../components/component/PapagoTransJs.js';
+import { PapagoTransJS } from '../../services/PapagoTransJs.js';
 
 export const OpenApi = () => {
   

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-import { GrayButtonWithSolidBorder as Button } from '../../../styles/common/Button.js';
-import AirplaneSVG from '../../../assets/icon/airplane.svg';
-import airlinesInfo from '../../components/data/airlines_info.json';
+import { GrayButtonWithSolidBorder as Button } from '../styles/common/Button.js';
+import AirplaneSVG from '../assets/icon/airplane.svg';
+import airlinesInfo from '../models/data/airlines_info.json';
 
 
 export const Container = styled.div `
@@ -60,7 +60,7 @@ export const FlightApiSearchForm = ( func ) => {
         </Wrapper>
 
         <Wrapper className="sub">
-          <form onSubmit={func.props}>
+          <form onSubmit={func.onSubmitFromView}>
             <label htmlFor="select">인천공항</label>
             <Select id="select">
               <option value="ARRIVAL_URL">도착</option>

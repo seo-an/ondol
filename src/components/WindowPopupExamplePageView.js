@@ -1,5 +1,5 @@
 // import { useState } from 'react';
-import { setPopup, windowPopup } from '../../../utils/popup.js';
+import { setPopup, windowPopup } from '../utils/popup.js';
 
 export const WindowPopupExamplePageView = () => {
 

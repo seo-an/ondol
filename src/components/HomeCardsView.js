@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 
-import { handleClickDiv } from '../../action/actionsForLinkCard.js';
+import { handleClickDiv } from '../models/actionsForLinkCard.js';
 
 
 export const CardContainer = styled.div `

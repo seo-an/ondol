@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /src/_dev_test
+/src/*/*.txt
 
 # production
 /build
