@@ -1,9 +1,9 @@
-import { RestApiJs } from '../../services/RestApiJs.js';
+import GuestBook from '../../theNew/GuestBook.js';
 
 const RestApi = () => {
   return (
     <>
-      <RestApiJs />
+      <GuestBook />
     </>
   )
 }

@@ -1,7 +1,7 @@
 {
   "name": "ondol",
-  "version": "0.2.0",
-  "description": "2012-12-29 폴더 구조 변경 작업중",
+  "version": "1.0.0",
+  "description": "인천공항 api > 철새 관측 정보로 교체 + 해당 페이지 리팩토링",
   "type": "module",
   "scripts": {
     "check": "tsc --noEmit",

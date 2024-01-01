@@ -1,10 +1,11 @@
-import { PapagoTransJS } from '../../services/PapagoTransJs.js';
+// import { PapagoTransJS } from '../../services/PapagoTransJs.js';
+import Parking from '../../theNew/parking/Parking.js';
 
 export const OpenApi = () => {
   
   return (
     <>
-      <PapagoTransJS />
+      <Parking />
     </>
   )
 }

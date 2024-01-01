@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-
-import SetURL from './SetURL.js';
+import { Link } from 'react-router-dom';
+// import { MenuForSetUrl as Menu } from './Nav.js';
 
 export const Wrapper = styled.nav `
   display: flex;
@@ -15,7 +15,7 @@ export const Wrapper = styled.nav `
   grid-row: 1;
 `;
 
-export const MenuForSetUrl = styled.div `
+export const Menu = styled.div `
   display: flex;
   width: 100%;
   min-width: 60px;
@@ -32,18 +32,59 @@ export const MenuForSetUrl = styled.div `
   }
 `;
 
+
+
+
+const useMenuData = () => {
+  const data = [
+    {
+      id: 'home',
+      url: '/',
+      text: 'Home',
+    },
+    {
+      id: 'handle-open-api',
+      url: '/handle-open-api',
+      text: 'API 포트폴리오',
+    },
+    {
+      id: 'handle-rest-api',
+      url: '/handle-rest-api',
+      text: 'REST API 포트폴리오',
+    },
+    {
+      id: 'about',
+      url: '/about',
+      text: 'About',
+    },
+  ];
+
+  return data;
+}
+
+
 const Nav = ({ nowScroll }) => {
+  const menuData = useMenuData();
+
   return (
     (nowScroll ? (
       <>
         <Wrapper scrl>
-          <SetURL />
+          {menuData.map(dat => (
+          <Menu key={dat.id}>
+            <Link to={dat.url}><span>{dat.text}</span></Link>
+          </Menu>
+        ))}
         </Wrapper>
       </>
     ) : (
       <>
         <Wrapper>
-          <SetURL />
+          {menuData.map(dat => (
+          <Menu key={dat.id}>
+            <Link to={dat.url}><span>{dat.text}</span></Link>
+          </Menu>
+        ))}
         </Wrapper>
       </>
     ))

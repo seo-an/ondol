@@ -1,102 +1,102 @@
-import { useState, useMemo } from 'react';
+// import { useState, useMemo } from 'react';
 
-import AIRLINES_INFO from '../models/data/airlines_info.json';
+// import AIRLINES_INFO from '../models/data/airlines_info.json';
 
-import { requestDataFromFlightApi as callApiData } from '../models/requestDataFromFlightApi.js';
-import { findAirline, findAirport } from '../models/actionsForFlightApi.js';
+// import { requestDataFromFlightApi as callApiData } from '../models/requestDataFromFlightApi.js';
+// import { findAirline, findAirport } from '../models/actionsForFlightApi.js';
 
-import FlightApiSearchForm from '../components/FlightApiSearchForm.js';
-import FlightApiResultDisplay from '../components/FlightApiResultDisplay.js';
-
-
-const FlightApiJs = () => {
-	const [airports, setAirports] = useState(AIRLINES_INFO.airport);
-	const [airlines, setAirlines] = useState(AIRLINES_INFO.airline);
-
-  const [searchObj, setSearchObj] = useState();
-  const [elements, setElements] = useState([]);
-
-	const pageSize = 5;
-	const paginationSize = 5;
+// import FlightApiSearchForm from '../components/FlightApiSearchForm.js';
+// import FlightApiResultDisplay from '../components/FlightApiResultDisplay.js';
 
 
-	const onSubmitFromView = (e) => {
-    e.preventDefault();
+// const FlightApiJs = () => {
+// 	const [airports, setAirports] = useState(AIRLINES_INFO.airport);
+// 	const [airlines, setAirlines] = useState(AIRLINES_INFO.airline);
 
-    let len = e.target.length;
-    let test = Array.from(e.target);
+//   const [searchObj, setSearchObj] = useState();
+//   const [elements, setElements] = useState([]);
 
-    const result = [];
-
-    let i=0;
-    for (i;i<len-1;i++) {
-      result.push(test[i].value);
-    }
-		return setSearchObj(result);
-  };
+// 	const pageSize = 5;
+// 	const paginationSize = 5;
 
 
-	const setPageView = ( dat ) => {
-    const raw = dat;
-		const len = raw.length;
+// 	const onSubmitFromView = (e) => {
+//     e.preventDefault();
 
-    if (raw === 'nothing')  {
-			console.error('비었음');
-			setElements('nothing');
-			return;
-		};
+//     let len = e.target.length;
+//     let test = Array.from(e.target);
 
-		const cooking = [];
-		let today = new Date();
+//     const result = [];
 
-		for (let i = 1; i < len + 1; i++) {
-			cooking.push( (raw[i-1]) ? (<div className="flight" key={`item+${i}+${today.getTime()}`}>
-				<ul>
-					<li>항공편: {raw[i-1].flightId}</li>
-					<li>상태: {(raw[i-1].remark) ? raw[i-1].remark : '확인되지 않음'}</li> 
-					<li>습도: {(raw[i-1].himidity)? `${raw[i-1].himidity}%` : '확인되지 않음'}</li>
-					<li>풍속: {(raw[i-1].wind)? `${raw[i-1].wind}㎧` : '확인되지 않음'}</li>
-					<li>관측 기온: {(raw[i-1].temp)? `${raw[i-1].temp}℃` : '확인되지 않음'}</li>
-					<li>항공사: {raw[i-1].airline}</li>
-					<li>공항: {raw[i-1].airport}</li>
-				</ul>
-			</div>) : null );
-		}
-
-		// raw data 넘기기
-		setElements(cooking);
-		return;
-  };
+//     let i=0;
+//     for (i;i<len-1;i++) {
+//       result.push(test[i].value);
+//     }
+// 		return setSearchObj(result);
+//   };
 
 
-	useMemo(() => {
-    // const airports = AIRLINES_INFO.airport;
-    // const airlines = AIRLINES_INFO.airline;
+// 	const setPageView = ( dat ) => {
+//     const raw = dat;
+// 		const len = raw.length;
+
+//     if (raw === 'nothing')  {
+// 			console.error('비었음');
+// 			setElements('nothing');
+// 			return;
+// 		};
+
+// 		const cooking = [];
+// 		let today = new Date();
+
+// 		for (let i = 1; i < len + 1; i++) {
+// 			cooking.push( (raw[i-1]) ? (<div className="flight" key={`item+${i}+${today.getTime()}`}>
+// 				<ul>
+// 					<li>항공편: {raw[i-1].flightId}</li>
+// 					<li>상태: {(raw[i-1].remark) ? raw[i-1].remark : '확인되지 않음'}</li> 
+// 					<li>습도: {(raw[i-1].himidity)? `${raw[i-1].himidity}%` : '확인되지 않음'}</li>
+// 					<li>풍속: {(raw[i-1].wind)? `${raw[i-1].wind}㎧` : '확인되지 않음'}</li>
+// 					<li>관측 기온: {(raw[i-1].temp)? `${raw[i-1].temp}℃` : '확인되지 않음'}</li>
+// 					<li>항공사: {raw[i-1].airline}</li>
+// 					<li>공항: {raw[i-1].airport}</li>
+// 				</ul>
+// 			</div>) : null );
+// 		}
+
+// 		// raw data 넘기기
+// 		setElements(cooking);
+// 		return;
+//   };
+
+
+// 	useMemo(() => {
+//     // const airports = AIRLINES_INFO.airport;
+//     // const airlines = AIRLINES_INFO.airline;
     
-    if ( !(searchObj === undefined) ) {
-      const url = searchObj[0];
-      const port = findAirport(airports, searchObj[1]);
-      const line = findAirline(airlines, searchObj[2]);
+//     if ( !(searchObj === undefined) ) {
+//       const url = searchObj[0];
+//       const port = findAirport(airports, searchObj[1]);
+//       const line = findAirline(airlines, searchObj[2]);
 
-			callApiData( url, port, line ).then((res) => {setPageView(res)});
-    }
+// 			callApiData( url, port, line ).then((res) => {setPageView(res)});
+//     }
 
-  }, [airports, airlines, searchObj]);
-
-
-	const goPagination = {
-		data: elements,
-		pageSize: pageSize,
-		paginationSize: paginationSize
-	};
+//   }, [airports, airlines, searchObj]);
 
 
-  return (
-    <>
-			<FlightApiSearchForm onSubmitFromView={ onSubmitFromView } />
-			<FlightApiResultDisplay props={ { ...goPagination } }/>
-    </>
-  )
-}
+// 	const goPagination = {
+// 		data: elements,
+// 		pageSize: pageSize,
+// 		paginationSize: paginationSize
+// 	};
 
-export default FlightApiJs;
+
+//   return (
+//     <>
+// 			<FlightApiSearchForm onSubmitFromView={ onSubmitFromView } />
+// 			<FlightApiResultDisplay props={ { ...goPagination } }/>
+//     </>
+//   )
+// }
+
+// export default FlightApiJs;

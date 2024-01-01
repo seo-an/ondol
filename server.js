@@ -97,18 +97,12 @@ app.post('/api/papago', async (req, res) => {
   const NAVER_API_HOSTNAME = 'openapi.naver.com';
   const PAPAGO_PATH = '/v1/papago/n2mt';
 
-  // const ddata = querystring.stringify({
-  //   source: req.body.source,
-  //   target: req.body.target,
-  //   text: req.body.text
-  // });
-
   const data = {
     source: req.body.source,
     target: req.body.target,
     text: req.body.text
   };
-
+  
   const externalOptions = {
     method: 'POST',
     hostname: NAVER_API_HOSTNAME,
@@ -124,31 +118,6 @@ app.post('/api/papago', async (req, res) => {
 
   res.status(200).json({ internal: 'GET External Response: SUCCESS', responses });
 
-
-
-
-
-  // const externalReq = https.request(externalOptions, (externalRes) => {
-  //   let data = '';
-
-  //   externalRes.on('data', (str) => {
-  //     data += str;
-  //   });
-
-  //   externalRes.on('end', () => {
-  //     console.log('Papago API Response:', data);
-  //     res.status(200).json({ internal: 'TRANSLATED DATA FROM PAPAGO', externalResponse: data });
-  //   });
-  // });
-
-  // externalReq.on('error', (error) => {
-  //   console.error('ERROR! External Request ::', error);
-  //   res.status(500).json({ error: 'Internal Server Error' });
-  // });
-
-  // // 내부 요청에서 받은 데이터를 외부 서버로 전송
-  // externalReq.write(ddata);
-  // externalReq.end();
 });
 
 // app.use(express.static(path.resolve(__dirname, 'build', 'index.html')));
@@ -162,7 +131,7 @@ app.get('*', (req, res) => {
 // 가장 마지막에
 app.listen(PORT, () => {
     console.log(`Node.js server on :: Server listening on port ${PORT}`);
-    // console.log(`Now running environment :: ${process.env.NODE_ENV}`);
+    console.log(`Now running environment :: ${process.env.NODE_ENV}`);
 
     // const http = require('http');
     // process.send('ready');
