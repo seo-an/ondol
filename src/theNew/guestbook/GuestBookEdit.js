@@ -1,26 +1,44 @@
-import { useRef } from "react";
+import { useEffect } from "react";
 
-import usePostToDatabase from "../api-database/put.js";
+import usePostToDatabase from "../api-database/post.js";
+import useFormSubmitValidation from "../formValidation.js";
 
 const GuestBookEdit = () => {
 	const { postData, response, error, isLoading } = usePostToDatabase();
 	
-	const usernameBinding = useRef(null);
-  const passwordBinding = useRef(null);
-	const titleBinding = useRef(null);
-	const contentBinding = useRef(null);
+	const validationRules = {
+    username: [
+      { validate: (value) => value.length !== 0, message: '이름을 입력해주세요.' }
+    ],
+    simple_password: [
+      { validate: (value) => value.length !== 0, message: '패스워드를 입력해주세요.' }
+    ],
+		title: [
+      { validate: (value) => value.length !== 0, message: '제목을 입력해주세요.' }
+    ],
+		comment: [
+      { validate: (value) => value.length !== 0, message: '내용이 비어있습니다.' }
+    ]
+  };
 
-	const handleSubmit = (event) => {
-		event.preventDefault();
-    const inputData = {
-      name: usernameBinding.current.value,
-      simple_password: passwordBinding.current.value,
-			title: titleBinding.current.value,
-			comment: contentBinding.current.value
-    };
+  const { elements, validatedState, handleSubmit } = useFormSubmitValidation(validationRules);
 
-		console.log('웅냥냐!!!', inputData);
-	}
+	useEffect(() => {
+		if (validatedState) {
+			const url = '/api/guestbook/data';
+			const inputData = {
+				name: elements.username.current.value,
+				simple_password: elements.simple_password.current.value,
+				title: elements.title.current.value,
+				comment: elements.comment.current.value,
+				isPublic: true
+			};
+	
+			console.log('웅냥냐!!!', inputData);
+			postData(url, inputData);
+		}
+	}, [validatedState]);
+	
 
 	return (
     <>
@@ -30,12 +48,12 @@ const GuestBookEdit = () => {
 						<div className="w50p">
 							<form onSubmit={handleSubmit}>
 								<div className="mgb10">
-									<input ref={usernameBinding} type="text" id="name" placeholder="이름"></input>
-									<input ref={passwordBinding} type="text" id="simple_password" placeholder="비밀번호"></input>
+									<input ref={elements.username} type="text" id="name" placeholder="이름"></input>
+									<input ref={elements.simple_password} type="text" id="simple_password" placeholder="비밀번호"></input>
 								</div>
 								<div>
-									<input ref={titleBinding} type="text" id="title" placeholder="제목"></input>
-									<textarea ref={contentBinding} type="text" id="comment" placeholder="내용"></textarea>
+									<input ref={elements.title} type="text" id="title" placeholder="제목"></input>
+									<textarea ref={elements.comment} type="text" id="comment" placeholder="내용"></textarea>
 								</div>
 								<div className="mgt10">
 									<button type="submit">등록</button>

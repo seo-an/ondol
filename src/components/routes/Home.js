@@ -1,4 +1,4 @@
-import HomeCards from '../../theNew/guestbook/HomeCards.js';
+import HomeCards from '../../theNew/HomeCards.js';
 
 export const Home = () => {
   return (

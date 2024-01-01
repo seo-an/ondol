@@ -1,11 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 const useGetFromDatabase = (url, parameter) => {
   const [data, setData] = useState(['nothing']);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [refreshIndex, setRefreshIndex] = useState(0); // 새로고침을 위한 상태
 
 	const queryString = new URLSearchParams(parameter).toString();
 
-  const getData = async () => {
+  const getData = useCallback(async () => {
+		setLoading(true);
+    setError(null);
 		try {
 			const response = await fetch(`${url}?${queryString}`, {
 				method: "GET",
@@ -17,26 +22,26 @@ const useGetFromDatabase = (url, parameter) => {
 
 			let result = await response.json();
 
-			// if (result.data.length === 0) {
-			// 	// database에 자료가 하나도 없을 때 예외처리
-			// 	return result = 'nothing';
-			// } else {
-			// 	// 최종
-			// 	return result.data;
-			// }
-
 			setData(result.data);
-
 		} catch (error) {
-			console.error('CAN NOT TRY TO FETCH :: ', error);
+			console.error('GET || CAN NOT TRY TO FETCH :: ', error);
+			setError(error);
+		} finally {
+			setLoading(false);
 		}
-  }
+  }, [url, parameter, refreshIndex]);
 
   useEffect(() => {
     getData();
   }, []);
 
-  return { data };
+
+	// 새로고침
+	const refreshData = () => {
+    setRefreshIndex(prev => prev + 1);
+  };
+
+  return { data, loading, error, refreshData };
 }
 
 export default useGetFromDatabase;

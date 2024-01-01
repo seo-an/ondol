@@ -1,4 +1,4 @@
-import GuestBook from '../../theNew/GuestBook.js';
+import GuestBook from '../../theNew/guestbook/GuestBook.js';
 
 const RestApi = () => {
   return (

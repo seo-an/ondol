@@ -25,36 +25,36 @@ export const postToDatabase = async (url, dat) => {
 	}
 };
 
-export const requestToDatabase = async (url, parameter) => {
-	const queryString = new URLSearchParams(parameter).toString();
+// export const requestToDatabase = async (url, parameter) => {
+// 	const queryString = new URLSearchParams(parameter).toString();
 
-		try {
-			const response = await fetch(`${url}?${queryString}`, {
-				method: "GET",
-			});
+// 		try {
+// 			const response = await fetch(`${url}?${queryString}`, {
+// 				method: "GET",
+// 			});
 
-			if (!response.ok) {
-				throw new Error('HTTP GET ERROR :: status ', response.status);
-			}
+// 			if (!response.ok) {
+// 				throw new Error('HTTP GET ERROR :: status ', response.status);
+// 			}
 
-			let result = await response.json();
+// 			let result = await response.json();
 
-			if (result.data.length === 0) {
-				// database에 자료가 하나도 없을 때 예외처리
-				return result = 'nothing';
-			} else {
-				// 최종
-				return result.data;
-			}
+// 			if (result.data.length === 0) {
+// 				// database에 자료가 하나도 없을 때 예외처리
+// 				return result = 'nothing';
+// 			} else {
+// 				// 최종
+// 				return result.data;
+// 			}
 
-		} catch (error) {
-			console.error('CAN NOT TRY TO FETCH :: ', error);
+// 		} catch (error) {
+// 			console.error('CAN NOT TRY TO FETCH :: ', error);
 
-			const result = 'nothing';
-			return result;
+// 			const result = 'nothing';
+// 			return result;
 
-		}
-};
+// 		}
+// };
 
 export const deleteInDatabase = async (url, dat) => {
 	// const data = [dat]; // uniqueId

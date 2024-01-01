@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import useGetFromDatabase from "./api-database/get.js";
-import useScrollLoadingData from "./scrolling.js";
+import useGetFromDatabase from "../api-database/get.js";
+import useScrollLoadingData from "../scrolling.js";
 
 
 const GuestBook = () => {
@@ -8,7 +8,7 @@ const GuestBook = () => {
   
   const cleaning = `DATE_FORMAT(createdAt, '%Y-%m-%d %H:%i:%s') AS lastUpdatedAt`;
   const getQuery = {
-    'select': `uniqueId, name, simple_password, comment, ${cleaning}`,
+    'select': `uniqueId, name, simple_password, title, comment, ${cleaning}`,
     'where': ``
   };
 
@@ -23,7 +23,7 @@ const GuestBook = () => {
           </div>
           <div style={{ display: 'flex', width: '100%', height: 'calc(100% - 24px)', alignContent: 'space-between', justifyContent: 'flex-end', flexWrap: 'wrap' }}>
             <div style={{ display: 'flex', width: '100%', flexWrap: 'wrap' }}>
-              <div style={{ display: 'flex', width: '100%' }}>방명록</div>
+              <div style={{ display: 'flex', width: '100%' }}>{item.title}</div>
               <div style={{ display: 'flex', width: '100%' }}>{item.comment}</div>
             </div>
             <div style={{ display: 'flex', marginRight: '16px' }}>{item.name}</div>
@@ -36,11 +36,13 @@ const GuestBook = () => {
   const { data } = useGetFromDatabase(url, getQuery);
   const { redered, hasMore } = useScrollLoadingData(data, redering, 2);
 
+
   const navigate = useNavigate();
 
-  function navigateToPage() {
+  const navigateToPage = () => {
     navigate('/write');
   }
+  
   
   return (
     <>

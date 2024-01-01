@@ -25,39 +25,36 @@ const dbConnection = pool(envSetting.mysqlServerConf);
 // Define API route (internal API)
 // post to database
 app.post('/api/guestbook/data', (req, res) => {
-  // console.log('Node.js server post to (/api/guestbook/data) : ', JSON.stringify(req.body[0]));
-  const data = {...req.body[0]};
+  // console.log('Node.js server post to (/api/guestbook/data) : ', req.body);
+  const data = (req.body) ? req.body : null;
 
-  const name = (data.name === undefined) ? null : ((data.name === '') ? null : data.name);
-  const password = (data.simple_password === undefined) ? null : ((data.simple_password === '') ? null : data.simple_password);
-  const comment = (data.comment === undefined) ? null : ((data.comment === '') ? null : data.comment);
-  const isPublic = true;
-  const isEncoded = false;
-
-  if ((name === null) || (password === null) || (comment === null)) {
+  if (data === null) {
     // handle error
     res.status(422).send({
       message: 'Unprocessable Entity: 올바른 값을 입력해주세요',
-      data: ''
+      data: data
     });
     return;
   }
 
   const prefix = String(new Date().getTime());
+  const isEncoded = false;
 
   // for real data
   const INSERT_DATA = `
-    INSERT INTO ${envSetting.API_INPUT_DATA_TO_THIS_TABLE} (uniqueId, name, simple_password, comment, isPublic, isEncoded)
+    INSERT INTO ${envSetting.API_INPUT_DATA_TO_THIS_TABLE} (uniqueId, name, simple_password, title, comment, isPublic, isEncoded)
     SELECT
-      CONCAT(IFNULL(1 + MAX(id), 1),'_${name}','${prefix}') AS uniqueID,
-      '${name}' AS name,
-      '${password}' AS simple_password,
-      '${comment}' AS comment,
-      '${isPublic}' AS isPublic,
+      CONCAT(IFNULL(1 + MAX(id), 1),'_${data.name}','${prefix}') AS uniqueID,
+      '${data.name}' AS name,
+      '${data.simple_password}' AS simple_password,
+      '${data.title}' AS title,
+      '${data.comment}' AS comment,
+      '${data.isPublic}' AS isPublic,
       '${isEncoded}' AS isEncoded
     FROM ${envSetting.API_INPUT_DATA_TO_THIS_TABLE};
   `;
 
+  console.log(INSERT_DATA);
   postConnect(res, dbConnection, INSERT_DATA);
 });
 
