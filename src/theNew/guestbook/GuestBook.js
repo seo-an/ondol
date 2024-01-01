@@ -36,9 +36,7 @@ const GuestBook = () => {
   const { data } = useGetFromDatabase(url, getQuery);
   const { redered, hasMore } = useScrollLoadingData(data, redering, 2);
 
-
   const navigate = useNavigate();
-
   const navigateToPage = () => {
     navigate('/write');
   }
@@ -46,7 +44,7 @@ const GuestBook = () => {
   
   return (
     <>
-      <h1>안녕안녕 다시 시작해보자</h1>
+      <h1>방명록</h1>
       <div>
         <div>
           <button onClick={navigateToPage}>글쓰기</button>

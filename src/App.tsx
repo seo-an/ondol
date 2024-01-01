@@ -14,6 +14,7 @@ import { WindowPopupExamplePageView } from './components/WindowPopupExamplePageV
 import { DateRangeExamplePageView } from './components/DateRangeExamplePageView.js';
 
 import { PopupView } from './components/PopupView.js';
+import GuestBookWrite from './theNew/guestbook/GuestBookWrite.js';
 import GuestBookEdit from './theNew/guestbook/GuestBookEdit.js';
 
 const App: React.FC = () => {
@@ -38,7 +39,8 @@ const App: React.FC = () => {
             <Route path="/handle-open-api" element={<OpenApiPage />}></Route>
 
             <Route path="/handle-rest-api" element={<RestApiPage />}></Route>
-            <Route path="/write" element={<GuestBookEdit />}></Route>
+            <Route path="/write" element={<GuestBookWrite />}></Route>
+            <Route path="/edit" element={<GuestBookEdit/>}></Route>
 
             <Route path="/about" element={<About />}></Route>
           </Route>

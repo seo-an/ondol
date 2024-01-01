@@ -61,7 +61,6 @@ app.post('/api/guestbook/data', (req, res) => {
 // get from database
 app.get('/api/guestbook/data', (req, res) => {
   const select = req.query.select;
-  // const from = req.query.from; // 똑같잖아?
   const from = envSetting.API_INPUT_DATA_TO_THIS_TABLE;
   const where = req.query.where;
 
