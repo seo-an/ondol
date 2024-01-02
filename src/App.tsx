@@ -39,8 +39,8 @@ const App: React.FC = () => {
             <Route path="/handle-open-api" element={<OpenApiPage />}></Route>
 
             <Route path="/handle-rest-api" element={<RestApiPage />}></Route>
-            <Route path="/write" element={<GuestBookWrite />}></Route>
-            <Route path="/edit" element={<GuestBookEdit/>}></Route>
+            <Route path="/guestbook/write" element={<GuestBookWrite />}></Route>
+            <Route path="/guestbook/edit" element={<GuestBookEdit/>}></Route>
 
             <Route path="/about" element={<About />}></Route>
           </Route>
@@ -59,27 +59,3 @@ const App: React.FC = () => {
 }
 
 export default App;
-
-// import React from 'react';
-// import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
-// import Greeting from './dev-test/test';
-
-// const App: React.FC = () => {
-
-//   return (
-//     <>
-//       <BrowserRouter basename="/">
-//         <Routes>
-//           <Route path="/">
-//             <Route index element={<Greeting />}></Route>
-//           </Route>
-//           <Route path="*" element={<h1>Error 404</h1>}></Route>
-//         </Routes>
-//       </BrowserRouter>
-//     </>
-//   );
-
-// };
-
-// export default App;

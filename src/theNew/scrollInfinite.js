@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 // initialData : 전체 데이터
 // render : 렌더링에 사용할 JSX
 // per : 한 번에 표시할 데이터
-const useScrollLoadingData = ( initialData, render, per = 3 ) => {
+const useInfiniteScroll = ( initialData, render, per = 3 ) => {
   const [data, setData] = useState([]);
   const [show, setShow] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -39,4 +39,4 @@ const useScrollLoadingData = ( initialData, render, per = 3 ) => {
   return { redered, hasMore };
 }
 
-export default useScrollLoadingData;
+export default useInfiniteScroll;
