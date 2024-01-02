@@ -40,7 +40,7 @@ const useFormSubmitValidation = (validationRules) => {
     const { isValid, firstErrorMessage } = validate();
     
     if (isValid) {
-      console.log('검증 성공');
+      // console.log('😎');
       setValidatedState(isValid);
     } else {
       alert(firstErrorMessage);

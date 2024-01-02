@@ -78,7 +78,7 @@ app.delete('/api/guestbook/data/:id', (req, res) => {
   const DELETE_DATA = `DELETE FROM ${envSetting.API_INPUT_DATA_TO_THIS_TABLE} WHERE uniqueId = '${uniqueId}' AND simple_password = '${password}';`;
 
   deleteConnect(res, dbConnection, DELETE_DATA);
-})
+});
 
 
 // const http = require('http');

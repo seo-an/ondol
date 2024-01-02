@@ -5,7 +5,7 @@ import usePostToDatabase from "../api-database/post.js";
 import useFormSubmitValidation from "../formValidation.js";
 
 const GuestBookWrite = () => {
-	const { postData, response, error, isLoading } = usePostToDatabase();
+	const { postData } = usePostToDatabase();
 	
 	const validationRules = {
     username: [
