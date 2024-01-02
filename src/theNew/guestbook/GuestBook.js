@@ -13,17 +13,48 @@ const GuestBook = () => {
     navigate('/guestbook/write');
   }
   
-  const [selectedItem, setSetlectedItem] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(null);
   const { isModalOpen, openModal, closeModal } = useManageModalState();
 
-  const handleItemClick = async (item) => {
-    console.log(item);
+  const [isItemSelected, setIsItemSelected] = useState(false);
+  const [currentSelected, setCurrentSelected] = useState(null);
+  const toggle = (event) => {
+    const targetDiv = event.currentTarget.closest("div[style*='flex-wrap: nowrap']").querySelector(".letterMarker");
+    if (!currentSelected) {
+      setCurrentSelected(targetDiv);
+      if(!isItemSelected) {
+        if (targetDiv) {
+          targetDiv.style.backgroundColor = "#cadeeb"; // 원하는 색상으로 변경 가능
+        }
+        setIsItemSelected(true);
+      } else {
+        targetDiv.style.backgroundColor = "#d6d6d6"; // 원래로 돌아감
+        setIsItemSelected(false);
+      }
+    } else {
+      if (targetDiv === currentSelected) {
+        targetDiv.style.backgroundColor = "#d6d6d6"; // 원래로 돌아감
+        setIsItemSelected(false);
+      } else {
+        currentSelected.style.backgroundColor = "#d6d6d6"; // 원래로 돌아감
+        setCurrentSelected(targetDiv);
+        targetDiv.style.backgroundColor = "#cadeeb"; // 원하는 색상으로 변경 가능
+        setIsItemSelected(true);
+      }
+    }
+    
+  }
+  const handleItemClick = async (item, event) => {
+    toggle(event);
+
     const selected = {
       id: item.uniqueId,
       password: item.simple_password
     }
-    setSetlectedItem(selected);
-  }
+    setSelectedItem(selected);
+
+    if (isItemSelected) setSelectedItem(null);
+  };
   
   const url = '/api/guestbook/data';
   
@@ -38,9 +69,9 @@ const GuestBook = () => {
   
   const redering = (item) => {
     return (
-      <div key={item.uniqueId} style={{ display: 'flex', flexWrap: 'nowrap' }}>
-        <div style={{ display: 'flex', width: '16px', minHeight: '280px', margin: '16px 0px 16px 16px', backgroundColor: '#d6d6d6' }}></div>
-        <div onClick={() => handleItemClick(item)} style={{ display: 'flex', width: '520px', minHeight: '280px', margin: '16px 16px 16px 0px', padding: '8px', border: '1px solid #d6d6d6', alignContent: 'flex-start', alignItems: 'center', flexWrap: 'wrap' }}>
+      <div key={item.uniqueId} style={{ display: 'flex', flexWrap: 'nowrap', justifyContent: 'center' }}>
+        <div className="letterMarker" style={{ display: 'flex', width: '16px', minHeight: '280px', margin: '16px 0px 16px 16px', borderTopLeftRadius: '4px', borderBottomLeftRadius: '4px', backgroundColor: '#d6d6d6' }}></div>
+        <div onClick={(event) => handleItemClick(item, event)} style={{ display: 'flex', width: '500px', minHeight: '280px', margin: '16px 16px 16px 0px', padding: '8px 24px', border: '1px solid #d6d6d6', borderTopRightRadius: '4px', borderBottomRightRadius: '4px', alignContent: 'flex-start', alignItems: 'center', flexWrap: 'wrap' }}>
           <div style={{ display: 'flex', width: '100%', height: 'fit-content', justifyContent: 'flex-end', flexWrap: 'nowrap' }}>
             <div>{item.lastUpdatedAt}</div>
           </div>
@@ -57,11 +88,12 @@ const GuestBook = () => {
   };
   
   const { currentData, currentPage, setCurrentPage, maxPage } = usePagination(data, redering, 3);
-
+  
   const passwordInput = useRef(null);
   const { deleteData } = useDeleteInDatabase(url); // 삭제
 
   const handleClickDelete = () => {
+    console.log('왜?', selectedItem);
     if (!selectedItem) {
       alert('삭제할 항목을 선택해주세요.');
       return;
@@ -78,7 +110,7 @@ const GuestBook = () => {
       alert('비밀번호가 다릅니다.');
     }
     closeModal();
-    toggleClass();
+    // toggleClass();
   }
 
   const handleClickEdit = () => {
@@ -86,18 +118,18 @@ const GuestBook = () => {
       alert('수정할 항목을 선택해주세요.');
       return;
     }
-    toggleClass();
+    // toggleClass();
     navigate('/guestbook/edit', { state : { id: selectedItem.id } }); // edit 화면으로 데이터 전달
   }
   
   return (
     <>
       <h1>방명록</h1>
-      <div>
-        <div>
+      <div style={{ display: 'flex', padding: '8px 32px', flexWrap: 'nowrap', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex' }}>
           <button onClick={goToWrite}>글쓰기</button>
         </div>
-        <div>
+        <div style={{ display: 'flex', width: '100px', justifyContent: 'space-between' }}>
           <button onClick={handleClickEdit}>수정</button>
           <button onClick={handleClickDelete}>삭제</button>
         </div>
@@ -107,7 +139,7 @@ const GuestBook = () => {
       <div>
         {currentData()}
       </div>
-      <div style={{ marginTop: '20px' }}>
+      <div style={{ display: 'flex', width: '100%', margin: '20px 0px', justifyContent: 'center', alignItems: 'center' }}>
         {Array.from({ length: maxPage }, (_, index) => index + 1).map(pageNumber => (
           <button
             key={pageNumber}
