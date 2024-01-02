@@ -34,7 +34,7 @@
 // 	const queryString = new URLSearchParams(params).toString();
 
 // 	try {
-// 		const response = await fetch(`/flight-api/${URL}?${queryString}`, {
+// 		const response = await fetch(`/incheon-api/${URL}?${queryString}`, {
 // 			method: "GET",
 // 		});
 

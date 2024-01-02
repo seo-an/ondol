@@ -15,7 +15,7 @@ const useFetchData = () => {
 
   const getData = async () => {
     try {
-      const response = await fetch(`/flight-api/${url}?${queryString}`, {
+      const response = await fetch(`/incheon-api/${url}?${queryString}`, {
         method: "GET",
       }).then((res) => res.json());
 

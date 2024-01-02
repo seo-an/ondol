@@ -1,4 +1,4 @@
-import useWindowPopup from "../theNew/windowPopup.js";
+import useWindowPopup from "../theNew/popupWindow.js";
 
 export const PopupView = () => {
 	const handleClose = () => {

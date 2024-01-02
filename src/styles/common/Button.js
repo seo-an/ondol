@@ -2,6 +2,7 @@ import styled, { css } from "styled-components";
 
 const colorCarrot = '#ff8a34';
 
+
 export const ClearButtonWithNoBorder = styled.button `
   display: flex;
   line-height: 25px;

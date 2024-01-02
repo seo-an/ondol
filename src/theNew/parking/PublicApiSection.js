@@ -1,14 +1,15 @@
 import { useState } from "react";
 import Incheon from "./Incheon.js";
+import Gimpo from "./Gimpo.js";
 
 const allTabs = [
   {
     title: '인천공항 주차 정보',
-    content: <Incheon />
+    content: () => <Incheon />
   },
   {
     title: '김포공항 주차 정보',
-    content: '준비중'
+    content: () => <Gimpo />
   },
 ];
 
@@ -26,11 +27,11 @@ const PublicApiSection = () => {
   return (
     <div>
       <div>
-				{allTabs.map((tab, index) => (
-					<button key={index} onClick={() => changeItem(index)}>{tab.title}</button>
-				))}
-			</div>
-      <div>{currentItem.content}</div>
+        {allTabs.map((tab, index) => (
+          <button key={index} onClick={() => changeItem(index)}>{tab.title}</button>
+        ))}
+      </div>
+      <div>{currentItem.content()}</div> {/* 컴포넌트를 렌더링하는 함수 호출 */}
     </div>
   );
 }
