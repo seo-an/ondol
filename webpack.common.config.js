@@ -1,7 +1,7 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-// import CopyPlugin from 'copy-webpack-plugin';
+import CopyPlugin from 'copy-webpack-plugin';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -58,8 +58,8 @@ export default {
   //   new CopyPlugin ({
   //     patterns: [
   //       {
-  //         from: 'src/assets/image',
-  //         to: 'media/images'
+  //         from: 'public/fonts',
+  //         to: 'fonts'
   //       } // from 폴더 안의 내용이 to로 복사되어 들어가도록 한다.
   //     ]
   //   })
