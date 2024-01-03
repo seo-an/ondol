@@ -21,7 +21,7 @@ const InfiniteScrollExample = () => {
 		);
 	};
 
-	const { redered, hasMore } = useInfiniteScroll(birdData, rendering, 75);
+	const { redered, hasMore } = useInfiniteScroll(birdData, rendering, 10);
 
   return (
     <div>

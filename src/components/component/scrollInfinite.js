@@ -9,10 +9,13 @@ const useInfiniteScroll = ( initialData, render, per = 3 ) => {
   const [hasMore, setHasMore] = useState(true);
 
   const loadMore = useCallback(() => {
+    if (initialData.length === 0) return;
     if (show * per >= initialData.length) {
       setHasMore(false);
       return;
     }
+
+    setHasMore(true);
     setShow(show + 1);
   }, [show, initialData.length, per]);
 
@@ -24,7 +27,13 @@ const useInfiniteScroll = ( initialData, render, per = 3 ) => {
   const redered = data.map((item, index) => render(item, index));
 
   useEffect(() => {
+    
+    if (document.documentElement.scrollHeight === document.documentElement.clientHeight && hasMore) {
+      loadMore();
+    }
+    
     const handleScroll = () => {
+      
       if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || !hasMore) {
         return;
       }
