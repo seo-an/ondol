@@ -82,7 +82,7 @@ const deleteConnect = async function(res, pool, queryString) {
     try {
         await pool.getConnection((err, connection) => {
             console.info(`SUCCESS! Database connected`);
-  
+
             connection.query(query, (err, results) => {
                 if (err) {
                     res.status(400).send({
@@ -119,4 +119,47 @@ const deleteConnect = async function(res, pool, queryString) {
     }
 };
 
-export { pool, getConnect, postConnect, deleteConnect };
+const putConnect = async function(res, pool, queryString) {
+    const query = queryString;
+
+    try {
+        await pool.getConnection((err, connection) => {
+            console.info(`SUCCESS! Database connected`);
+
+            connection.query(query, (err, results) => {
+                if (err) {
+                    res.status(400).send({
+                        message: 'Query execution error',
+                        data: err
+                    });
+                    connection.release();
+                    return;
+                }
+
+                if (results.affectedRows === 0) {
+                    res.status(404).send({
+                        message: 'No rows affected, update failed',
+                        data: null
+                    });
+                    connection.release();
+                    return;
+                }
+
+                res.status(200).send({
+                    message: '200 OK',
+                    data: results
+                });
+
+                connection.release();
+            });
+        });
+    } catch (err) {
+        console.error('! CAN NOT CONNECT TO DATABASE ::', err);
+        res.status(500).send({
+            message: 'Server error : can not connect to database',
+            data: err
+        });
+    }
+};
+
+export { pool, getConnect, postConnect, deleteConnect, putConnect };

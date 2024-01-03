@@ -1,6 +1,7 @@
 import { merge } from 'webpack-merge';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import webpack from 'webpack';
 
 import common from './webpack.common.config.js';
 
@@ -30,9 +31,17 @@ export default merge(common, {
     static: {
       directory: path.join(__dirname, 'build'),
     },
-    port: 8573,
+    port: 5500,
+    hot: true, // HMR (Hot Module Replacement) 활성화
     historyApiFallback: true, // React 라우터를 위한 설정
-    hot: true,
     open: true,
-  }
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(), // HMR 플러그인 추가
+  ],
 });
+
+// HMR 추가 설정
+// npm install react-hot-loader --save-dev
+// 어플리케이션의 루트 컴포넌트를 hot 함수로 감싸줌
+// export default hot(App);

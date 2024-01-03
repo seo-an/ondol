@@ -23,7 +23,7 @@ const GuestBook = () => {
       setCurrentSelected(targetDiv);
       if(!isItemSelected) {
         if (targetDiv) {
-          targetDiv.style.backgroundColor = "#cadeeb"; // 원하는 색상으로 변경 가능
+          targetDiv.style.backgroundColor = "#cadeeb"; // 하이라이트
         }
         setIsItemSelected(true);
       } else {
@@ -37,12 +37,12 @@ const GuestBook = () => {
       } else {
         currentSelected.style.backgroundColor = "#d6d6d6"; // 원래로 돌아감
         setCurrentSelected(targetDiv);
-        targetDiv.style.backgroundColor = "#cadeeb"; // 원하는 색상으로 변경 가능
+        targetDiv.style.backgroundColor = "#cadeeb"; // 하이라이트
         setIsItemSelected(true);
       }
     }
-    
-  }
+  };
+
   const handleItemClick = async (item, event) => {
     toggle(event);
 
@@ -71,28 +71,31 @@ const GuestBook = () => {
       <div key={item.uniqueId} style={{ display: 'flex', flexWrap: 'nowrap', justifyContent: 'center' }}>
         <div className="letterMarker" style={{ display: 'flex', width: '16px', minHeight: '280px', margin: '16px 0px 16px 16px', borderTopLeftRadius: '4px', borderBottomLeftRadius: '4px', backgroundColor: '#d6d6d6' }}></div>
         <div onClick={(event) => handleItemClick(item, event)} style={{ display: 'flex', width: '500px', minHeight: '280px', margin: '16px 16px 16px 0px', padding: '8px 24px', border: '1px solid #d6d6d6', borderTopRightRadius: '4px', borderBottomRightRadius: '4px', alignContent: 'flex-start', alignItems: 'center', flexWrap: 'wrap' }}>
-          <div style={{ display: 'flex', width: '100%', height: 'fit-content', justifyContent: 'flex-end', flexWrap: 'nowrap' }}>
-            <div>{item.lastUpdatedAt}</div>
+          <div style={{ display: 'flex', width: '100%', height: '64px', alignItems: 'center', justifyContent: 'flex-end', flexWrap: 'nowrap' }}>
+            <div style={{ display: 'flex', color: '#a0a0a0', marginRight: '8px'}}>{item.lastUpdatedAt}</div>
           </div>
-          <div style={{ display: 'flex', width: '100%', height: 'calc(100% - 24px)', alignContent: 'space-between', justifyContent: 'flex-end', flexWrap: 'wrap' }}>
-            <div style={{ display: 'flex', width: '100%', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', width: '100%', height: 'calc(100% - 64px)' }}>
+            <div style={{ display: 'grid', width: '100%', gridTemplateColumns: '1fr 9fr', gridTemplateRows: '2fr 6fr 2fr' }}>
+              <div style={{ display: 'flex', marginRight: '8px', color: '#a0a0a0' }}>제목</div>
               <div style={{ display: 'flex', width: '100%' }}>{item.title}</div>
+
+              <div style={{ display: 'flex', marginRight: '8px', color: '#a0a0a0' }}>내용</div>
               <div style={{ display: 'flex', width: '100%' }}>{item.comment}</div>
+
+              <div style={{ display: 'flex', marginRight: '8px', justifyContent: 'flex-end', color: '#a0a0a0', gridColumn: '1 / span 2' }}>From. {item.name}</div>
             </div>
-            <div style={{ display: 'flex', marginRight: '16px' }}>{item.name}</div>
           </div>
         </div>
       </div>
     );
   };
   
-  const { currentData, currentPage, setCurrentPage, maxPage } = usePagination(data, redering, 3);
+  const { currentData, currentPage, setCurrentPage, maxPage } = usePagination(data, redering, 5);
   
   const passwordInput = useRef(null);
   const { deleteData } = useDeleteInDatabase(url); // 삭제
 
   const handleClickDelete = () => {
-    console.log('왜?', selectedItem);
     if (!selectedItem) {
       alert('삭제할 항목을 선택해주세요.');
       return;
@@ -123,22 +126,24 @@ const GuestBook = () => {
   
   return (
     <>
-      <h1>방명록</h1>
-      <div style={{ display: 'flex', padding: '8px 32px', flexWrap: 'nowrap', justifyContent: 'space-between' }}>
-        <div style={{ display: 'flex' }}>
-          <button onClick={goToWrite}>글쓰기</button>
-        </div>
-        <div style={{ display: 'flex', width: '100px', justifyContent: 'space-between' }}>
-          <button onClick={handleClickEdit}>수정</button>
-          <button onClick={handleClickDelete}>삭제</button>
+      
+      <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', width: '100%', margin: '3em 0', justifyContent: 'center' }}><h1>방명록</h1></div>
+        <div style={{ display: 'flex', width: '580px', padding: '8px', flexWrap: 'nowrap', justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex' }}>
+            <button onClick={goToWrite}>글쓰기</button>
+          </div>
+          <div style={{ display: 'flex', width: '100px', justifyContent: 'space-between' }}>
+            <button onClick={handleClickEdit}>수정</button>
+            <button onClick={handleClickDelete}>삭제</button>
+          </div>
         </div>
       </div>
-
       {/* 페이지네이션 */}
       <div>
         {currentData()}
       </div>
-      <div style={{ display: 'flex', width: '100%', margin: '20px 0px', justifyContent: 'center', alignItems: 'center' }}>
+      <div style={{ display: 'flex', width: '100%', margin: '2em 0 4em 0', justifyContent: 'center', alignItems: 'center' }}>
         {Array.from({ length: maxPage }, (_, index) => index + 1).map(pageNumber => (
           <button
             key={pageNumber}

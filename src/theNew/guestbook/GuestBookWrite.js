@@ -41,33 +41,42 @@ const GuestBookWrite = () => {
 			};
 	
 			postData(url, inputData);
-			navigateToPage();
+			setTimeout(navigateToPage, 1500);
 		}
 	}, [validatedState]);
 	
 
 	return (
     <>
-			<h1>글쓰기</h1>
-				<div>
-					<div>
-						<div className="w50p">
-							<form onSubmit={handleSubmit}>
-								<div className="mgb10">
-									<input ref={elements.username} type="text" id="name" placeholder="이름"></input>
-									<input ref={elements.simple_password} type="text" id="simple_password" placeholder="비밀번호"></input>
-								</div>
-								<div>
-									<input ref={elements.title} type="text" id="title" placeholder="제목"></input>
-									<textarea ref={elements.comment} type="text" id="comment" placeholder="내용"></textarea>
-								</div>
-								<div className="mgt10">
-									<button type="submit">등록</button>
-								</div>
-							</form>
+			<div style={{margin: '0 0 4em 0'}}>
+
+				<div style={{margin: '4em 0', textAlign: 'center'}}>
+					<h3>방명록 작성</h3>
+				</div>
+				<form onSubmit={handleSubmit}>
+				<div style={{display: 'flex', width: '100%'}}>
+					
+					<div style={{ display: 'grid', width: '100%', gridTemplateColumns: '1fr 3fr 1fr', gridTemplateRows: 'repeat(5, auto)' }}>
+						<div style={{ gridArea: '1 / 2' }}>
+							<input ref={elements.username} type="text" id="name" placeholder="이름" style={{ width: '100%', lineHeight: '2em', border: '0px' }}></input>
+						</div>
+						<div style={{ gridArea: '2 / 2' }}>
+							<input ref={elements.simple_password} type="text" id="simple_password" placeholder="비밀번호" style={{ width: '100%', lineHeight: '2em', border: '0px' }}></input>
+						</div>
+						<div style={{ gridArea: '3 / 2' }}>
+							<input ref={elements.title} type="text" id="title" placeholder="제목" style={{ width: '100%', lineHeight: '2em', border: '0px' }}></input>
+						</div>
+						<div style={{ gridArea: '4 / 2', marginTop: '16px' }}>
+							<textarea ref={elements.comment} type="text" id="comment" placeholder="내용" style={{ width: 'calc(100% - 16px)', height: '284px', padding: '8px', overflow: 'auto', resize: 'none' }}></textarea>
+						</div>
+						<div style={{ gridArea: '5 / 2', display: 'flex', justifyContent: 'flex-end' }}>
+							<button type="submit">등록</button>
 						</div>
 					</div>
+					
 				</div>
+				</form>
+			</div>
 		</>
 	);
 }

@@ -1,7 +1,7 @@
 {
   "name": "ondol",
   "version": "1.0.0",
-  "description": "인천공항 api > 철새 관측 정보로 교체 + 해당 페이지 리팩토링",
+  "description": "인천공항 api > 주차장 사용률 정보로 교체",
   "type": "module",
   "scripts": {
     "check": "tsc --noEmit",
