@@ -39,7 +39,7 @@ const App: React.FC = () => {
   return (
     <>
       <BrowserRouter basename="/">
-        <Suspense fallback={<div>로딩 중 🐰 🥕 🥕 🥕</div>}>
+        <Suspense fallback={<div><h1>로딩 중 🐰 <span className='fadeIn2s'>🥕</span> <span className='fadeIn5s'>🥕</span> <span className='fadeIn8s'>🥕</span></h1></div>}>
           <Routes>
             <Route path="/" element={<Layout />}>
               {/* 상단 메뉴 */}
@@ -49,7 +49,6 @@ const App: React.FC = () => {
               <Route path="/handle-rest-api" element={<RestApiPage />}></Route>
               <Route path="/about" element={<About />}></Route>
               
-
               {/* 그 외 라우팅 페이지 */}
               {/* 카드 메뉴 */}
               <Route path="/calendar" element={<MyCalendar />}></Route>

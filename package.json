@@ -1,7 +1,7 @@
 {
   "name": "ondol",
-  "version": "2.1.0",
-  "description": "지연 로딩 적용",
+  "version": "2.1.1",
+  "description": "모바일 이슈 수정",
   "type": "module",
   "scripts": {
     "check": "tsc --noEmit",
