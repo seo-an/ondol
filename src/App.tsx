@@ -1,4 +1,4 @@
-import React, { lazy } from 'react';
+import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Layout from './components/layout/Layout.js';
@@ -22,16 +22,16 @@ import About from './components/routes/About.js';
 // const RestApiPage = lazy(() => import('./components/routes/RestApiPage.js'));
 // const About = lazy(() => import('./components/routes/About.js'));
 
-const WindowPopup = lazy(() => import('./components/component/WindowPopup.js'));
+const WindowPopup = React.lazy(() => import('./components/component/WindowPopup.js'));
 
-const GuestBookWrite = lazy(() => import('./components/component/guestbook/GuestBookWrite.js'));
-const GuestBookEdit = lazy(() => import('./components/component/guestbook/GuestBookEdit.js'));
-const MyCalendar = lazy(() => import('./components/component/cards/calendar/MyCalendar.js'));
-const ModalExample = lazy(() => import('./components/component/cards/modalExample.js'));
-const LayerExample = lazy(() => import('./components/component/cards/layerPopupExample.js'));
-const WindowPopExample = lazy(() => import('./components/component/cards/windowPopupExample.js'));
-const InfiniteScrollExample = lazy(() => import('./components/component/cards/infiniteScrollExample.js'));
-const PapagoTransExample = lazy(() => import('./components/component/cards/papagoExample.js'));
+const GuestBookWrite = React.lazy(() => import('./components/component/guestbook/GuestBookWrite.js'));
+const GuestBookEdit = React.lazy(() => import('./components/component/guestbook/GuestBookEdit.js'));
+const MyCalendar = React.lazy(() => import('./components/component/cards/calendar/MyCalendar.js'));
+const ModalExample = React.lazy(() => import('./components/component/cards/modalExample.js'));
+const LayerExample = React.lazy(() => import('./components/component/cards/layerPopupExample.js'));
+const WindowPopExample = React.lazy(() => import('./components/component/cards/windowPopupExample.js'));
+const InfiniteScrollExample = React.lazy(() => import('./components/component/cards/infiniteScrollExample.js'));
+const PapagoTransExample = React.lazy(() => import('./components/component/cards/papagoExample.js'));
 
 
 const App: React.FC = () => {
