@@ -1,10 +1,9 @@
 html, body {
 	margin: 0;
-	font-family: 'seoanCocktail', 'seoanCocktailBomb', Arial, sans-serif;;
+	font-family: 'Noto Sans KR', Arial, sans-serif;;
 	font-style: normal;
 	font-size: 16px;
 	color: #333;
-	font-display: swap;
 }
 
 #root {
