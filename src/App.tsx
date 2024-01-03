@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { lazy } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
@@ -51,24 +51,25 @@ const App: React.FC = () => {
             <Route path="/about" element={<About />}></Route>
           </Route>
 
-          {/* 그 외 라우팅 페이지 */}
-          {/* 카드 메뉴 */}
-          <Route path="/calendar" element={<MyCalendar />}></Route>
-          <Route path="/modal-example" element={<ModalExample />}></Route>
-          <Route path="/layer-example" element={<LayerExample />}></Route>
-          <Route path="/windowpop-example" element={<WindowPopExample />}></Route>
-          <Route path="/infinite-scroll-example" element={<InfiniteScrollExample />}></Route>
-          <Route path="/papago-api" element={<PapagoTransExample />}></Route>
+          <Suspense fallback={<div>Loading...</div>}>
+            {/* 그 외 라우팅 페이지 */}
+            {/* 카드 메뉴 */}
+            <Route path="/calendar" element={<MyCalendar />}></Route>
+            <Route path="/modal-example" element={<ModalExample />}></Route>
+            <Route path="/layer-example" element={<LayerExample />}></Route>
+            <Route path="/windowpop-example" element={<WindowPopExample />}></Route>
+            <Route path="/infinite-scroll-example" element={<InfiniteScrollExample />}></Route>
+            <Route path="/papago-api" element={<PapagoTransExample />}></Route>
+            {/* 방명록 */}
+            <Route path="/guestbook/write" element={<GuestBookWrite />}></Route>
+            <Route path="/guestbook/edit" element={<GuestBookEdit/>}></Route>
+            {/* 윈도우 팝업 */}
+            <Route path="/popup-view" element={<WindowPopup />}></Route>
+          </Suspense>
 
-          <Route path="/guestbook/write" element={<GuestBookWrite />}></Route>
-          <Route path="/guestbook/edit" element={<GuestBookEdit/>}></Route>
 
-          <Route path="/popup-view" element={<WindowPopup />}></Route>
-
-          {/* 에러 및 테스트 */}
-          <Route path="*" element={<div><h1 style={{textAlign: 'center'}}>👩‍🌾 죄송합니다. 페이지가 현재 작업중이네요! 🥕</h1></div>}></Route>
-          {/* <Route path="/dev-test" element={<DevTestView />}></Route> */}
-          
+          {/* 에러 */}
+          <Route path="*" element={<div><h1 style={{textAlign: 'center'}}>👩‍🌾 죄송합니다. 페이지가 현재 작업중이네요! 🥕</h1></div>}></Route>          
         </Routes>
       </BrowserRouter>
     </>
