@@ -1,5 +1,5 @@
 // import { PapagoTransJS } from '../../services/PapagoTransJs.js';
-import Parking from '../../theNew/parking/Parking.js';
+import Parking from '../component/parking/Parking.js';
 
 export const OpenApi = () => {
   

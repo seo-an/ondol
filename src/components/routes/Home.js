@@ -1,4 +1,4 @@
-import HomeCards from '../../theNew/HomeCards.js';
+import HomeCards from '../component/HomeCards.js';
 
 export const Home = () => {
   return (

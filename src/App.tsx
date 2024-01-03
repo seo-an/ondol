@@ -7,15 +7,11 @@ import OpenApiPage from './components/routes/OpenApiPage.js';
 import RestApiPage from './components/routes/RestApiPage.js';
 import About from './components/routes/About.js';
 
-import { CalendarView } from './components/CalendarView.js';
-import { SvgImg } from './services/SvgImgJs.js';
-import { ModalExamplePageView } from './components/ModalExamplePageView.js';
-import { WindowPopupExamplePageView } from './components/WindowPopupExamplePageView.js';
-import { DateRangeExamplePageView } from './components/DateRangeExamplePageView.js';
+import WindowPopup from './components/component/WindowPopup.js';
 
-import { PopupView } from './components/PopupView.js';
-import GuestBookWrite from './theNew/guestbook/GuestBookWrite.js';
-import GuestBookEdit from './theNew/guestbook/GuestBookEdit.js';
+import GuestBookWrite from './components/component/guestbook/GuestBookWrite.js';
+import GuestBookEdit from './components/component/guestbook/GuestBookEdit.js';
+import MyCalendar from './components/component/calendar/MyCalendar.js';
 
 const App: React.FC = () => {
 
@@ -29,12 +25,7 @@ const App: React.FC = () => {
             <Route index element={<Home />}></Route>
             <Route path="/home" element={<Home />}></Route>
             {/* 카드 메뉴 */}
-            <Route path="/calendar" element={<CalendarView />}></Route>
-            <Route path="/svg-component" element={<SvgImg />}></Route>
-            {/* <Route path="/api-datas-go-kr" element={<FlightApiJs />}></Route> */}
-            <Route path="/modal" element={<ModalExamplePageView />}></Route>
-            <Route path="/window-popup" element={<WindowPopupExamplePageView />}></Route>
-            {/* <Route path="/date-range-selection" element={<DateRangeExamplePageView />}></Route> */}
+            <Route path="/calendar" element={<MyCalendar />}></Route>
 
             <Route path="/handle-open-api" element={<OpenApiPage />}></Route>
 
@@ -46,7 +37,7 @@ const App: React.FC = () => {
           </Route>
 
           {/* 그 외 라우팅 페이지 */}
-          <Route path="/popup-view" element={<PopupView />}></Route>
+          <Route path="/popup-view" element={<WindowPopup />}></Route>
 
           {/* 에러 및 테스트 */}
           <Route path="*" element={<h1>Error 404</h1>}></Route>
