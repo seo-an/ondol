@@ -1,8 +1,8 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import useGetFromDatabase from "../api-database/get.js";
+import useGetFromDatabase from "../database-api/get.js";
 import useManageModalState from "../popupModal.js";
-import useDeleteInDatabase from "../api-database/delete.js";
+import useDeleteInDatabase from "../database-api/delete.js";
 import usePagination from "../pagination.js";
 
 

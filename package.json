@@ -1,7 +1,7 @@
 {
   "name": "ondol",
-  "version": "2.0.0",
-  "description": "2024-01-03 리팩토링 완료",
+  "version": "2.0.1",
+  "description": "디자인 마이너 수정",
   "type": "module",
   "scripts": {
     "check": "tsc --noEmit",

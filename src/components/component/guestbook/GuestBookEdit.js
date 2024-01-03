@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import useGetFromDatabase from "../api-database/get.js";
+import useGetFromDatabase from "../database-api/get.js";
 import useRedirectOnRefresh from "../redirectOnRefresh.js";
-import usePutToDatabase from "../api-database/put.js";
+import usePutToDatabase from "../database-api/put.js";
 
 const GuestBookEdit = () => {
 	const { redirectOnRefresh } = useRedirectOnRefresh();

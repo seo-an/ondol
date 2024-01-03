@@ -50,7 +50,7 @@ const App: React.FC = () => {
           <Route path="/popup-view" element={<WindowPopup />}></Route>
 
           {/* 에러 및 테스트 */}
-          <Route path="*" element={<h1>Error 404</h1>}></Route>
+          <Route path="*" element={<div><h1 style={{textAlign: 'center'}}>👩‍🌾 죄송합니다. 페이지가 현재 작업중이네요! 🥕</h1></div>}></Route>
           {/* <Route path="/dev-test" element={<DevTestView />}></Route> */}
           
         </Routes>

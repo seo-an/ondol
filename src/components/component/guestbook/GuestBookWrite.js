@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import usePostToDatabase from "../api-database/post.js";
+import usePostToDatabase from "../database-api/post.js";
 import useFormSubmitValidation from "../formValidation.js";
 
 const GuestBookWrite = () => {

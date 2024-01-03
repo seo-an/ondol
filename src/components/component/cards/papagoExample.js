@@ -50,7 +50,7 @@ export const PapagoTransExample = () => {
 					<h2>파파고 번역 API</h2>
 				</div>
 
-				<div style={{ display: 'flex', flexWrap: 'wrap' }}>
+				<div style={{ display: 'flex', width: '100%', flexWrap: 'wrap' }}>
 					<div style={{ display: 'flex', width: '100%', margin: '0 0 2em 0', justifyContent: 'center' }}>
 						<h3>한영 번역기</h3>
 					</div>
