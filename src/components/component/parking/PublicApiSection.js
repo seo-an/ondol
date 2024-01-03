@@ -18,20 +18,24 @@ const useTabs = (initialTab, allTabs) => {
 
   return {
     currentItem: allTabs[currIndex],
-    changeItem: setCurrIndex
+    changeItem: setCurrIndex, 
+    currIndex
   };
 }
 
 const PublicApiSection = () => {
-  const { currentItem, changeItem } = useTabs(0, allTabs);
+  const { currentItem, changeItem, currIndex } = useTabs(0, allTabs);
   return (
     <div>
-      <div>
+      <div style={{ display: 'flex' }}>
         {allTabs.map((tab, index) => (
-          <button key={index} onClick={() => changeItem(index)}>{tab.title}</button>
+          <button key={index} onClick={() => changeItem(index)} style={{ padding: '16px', fontSize: '1.2em', backgroundColor: 'transparent', border: '0px', cursor: 'pointer', color: currIndex === index ? 'black' : '#c1c1c1' }}>{tab.title}</button>
         ))}
       </div>
-      <div>{currentItem.content()}</div> {/* 컴포넌트를 렌더링하는 함수 호출 */}
+
+      <div style={{ padding: '16px' }}>
+        {currentItem.content()} {/* 컴포넌트를 렌더링하는 함수 호출 */}
+      </div>
     </div>
   );
 }

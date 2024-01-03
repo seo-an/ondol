@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const useManageModalState = () => {
+const useManageLayerState = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -35,4 +35,4 @@ const useManageModalState = () => {
   return { isModalOpen, openModal, closeModal };
 };
 
-export default useManageModalState;
+export default useManageLayerState;

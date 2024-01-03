@@ -56,7 +56,11 @@ const Gimpo = () => {
   return (
     <>
       <div>
-        <h2>- API 사용 준비중입니다 -</h2>
+        <div style={{ margin: '4em 0', textAlign: 'center' }}>
+          <h1>김포공항 주차면적</h1>
+          <h2>API 승인 대기중입니다 👷‍♀️</h2>
+        </div>
+        
         {/* {(data === 'nothing') ? <p>데이터가 없습니다.</p> :
           <>
             {data.map((item) => {

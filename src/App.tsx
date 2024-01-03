@@ -11,7 +11,12 @@ import WindowPopup from './components/component/WindowPopup.js';
 
 import GuestBookWrite from './components/component/guestbook/GuestBookWrite.js';
 import GuestBookEdit from './components/component/guestbook/GuestBookEdit.js';
-import MyCalendar from './components/component/calendar/MyCalendar.js';
+import MyCalendar from './components/component/cards/calendar/MyCalendar.js';
+import ModalExample from './components/component/cards/modalExample.js';
+import LayerExample from './components/component/cards/layerPopupExample.js';
+import WindowPopExample from './components/component/cards/windowPopupExample.js';
+import InfiniteScrollExample from './components/component/cards/infiniteScrollExample.js';
+import PapagoTransExample from './components/component/cards/papagoExample.js';
 
 const App: React.FC = () => {
 
@@ -26,6 +31,11 @@ const App: React.FC = () => {
             <Route path="/home" element={<Home />}></Route>
             {/* 카드 메뉴 */}
             <Route path="/calendar" element={<MyCalendar />}></Route>
+            <Route path="/modal-example" element={<ModalExample />}></Route>
+            <Route path="/layer-example" element={<LayerExample />}></Route>
+            <Route path="/windowpop-example" element={<WindowPopExample />}></Route>
+            <Route path="/infinite-scroll-example" element={<InfiniteScrollExample />}></Route>
+            <Route path="/papago-api" element={<PapagoTransExample />}></Route>
 
             <Route path="/handle-open-api" element={<OpenApiPage />}></Route>
 

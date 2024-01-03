@@ -1,4 +1,4 @@
-import HomeCards from '../component/HomeCards.js';
+import HomeCards from '../component/cards/HomeCards.js';
 
 export const Home = () => {
   return (
