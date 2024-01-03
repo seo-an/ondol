@@ -4,9 +4,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Layout from './components/layout/Layout.js';
 import Home from './components/routes/Home.js';
-// import OpenApiPage from './components/routes/OpenApiPage.js';
-// import RestApiPage from './components/routes/RestApiPage.js';
-// import About from './components/routes/About.js';
+import OpenApiPage from './components/routes/OpenApiPage.js';
+import RestApiPage from './components/routes/RestApiPage.js';
+import About from './components/routes/About.js';
 
 // import WindowPopup from './components/component/WindowPopup.js';
 
@@ -19,9 +19,9 @@ import Home from './components/routes/Home.js';
 // import InfiniteScrollExample from './components/component/cards/infiniteScrollExample.js';
 // import PapagoTransExample from './components/component/cards/papagoExample.js';
 
-const OpenApiPage = lazy(() => import('./components/routes/OpenApiPage.js'));
-const RestApiPage = lazy(() => import('./components/routes/RestApiPage.js'));
-const About = lazy(() => import('./components/routes/About.js'));
+// const OpenApiPage = lazy(() => import('./components/routes/OpenApiPage.js'));
+// const RestApiPage = lazy(() => import('./components/routes/RestApiPage.js'));
+// const About = lazy(() => import('./components/routes/About.js'));
 
 const WindowPopup = lazy(() => import('./components/component/WindowPopup.js'));
 
