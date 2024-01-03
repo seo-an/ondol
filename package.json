@@ -1,7 +1,7 @@
 {
   "name": "ondol",
-  "version": "1.0.0",
-  "description": "인천공항 api > 주차장 사용률 정보로 교체",
+  "version": "2.0.0",
+  "description": "2024-01-03 리팩토링 완료",
   "type": "module",
   "scripts": {
     "check": "tsc --noEmit",
