@@ -46,24 +46,23 @@ const App: React.FC = () => {
             {/* 상단 메뉴 */}
             <Route index element={<Home />}></Route>
             <Route path="/home" element={<Home />}></Route>
-            {/* 카드 메뉴 */}
-            <Route path="/calendar" element={<MyCalendar />}></Route>
-            <Route path="/modal-example" element={<ModalExample />}></Route>
-            <Route path="/layer-example" element={<LayerExample />}></Route>
-            <Route path="/windowpop-example" element={<WindowPopExample />}></Route>
-            <Route path="/infinite-scroll-example" element={<InfiniteScrollExample />}></Route>
-            <Route path="/papago-api" element={<PapagoTransExample />}></Route>
-
             <Route path="/handle-open-api" element={<OpenApiPage />}></Route>
-
             <Route path="/handle-rest-api" element={<RestApiPage />}></Route>
-            <Route path="/guestbook/write" element={<GuestBookWrite />}></Route>
-            <Route path="/guestbook/edit" element={<GuestBookEdit/>}></Route>
-
             <Route path="/about" element={<About />}></Route>
           </Route>
 
           {/* 그 외 라우팅 페이지 */}
+          {/* 카드 메뉴 */}
+          <Route path="/calendar" element={<MyCalendar />}></Route>
+          <Route path="/modal-example" element={<ModalExample />}></Route>
+          <Route path="/layer-example" element={<LayerExample />}></Route>
+          <Route path="/windowpop-example" element={<WindowPopExample />}></Route>
+          <Route path="/infinite-scroll-example" element={<InfiniteScrollExample />}></Route>
+          <Route path="/papago-api" element={<PapagoTransExample />}></Route>
+
+          <Route path="/guestbook/write" element={<GuestBookWrite />}></Route>
+          <Route path="/guestbook/edit" element={<GuestBookEdit/>}></Route>
+
           <Route path="/popup-view" element={<WindowPopup />}></Route>
 
           {/* 에러 및 테스트 */}
