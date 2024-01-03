@@ -1,5 +1,4 @@
-import React, { Suspense } from 'react';
-import { lazy } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Layout from './components/layout/Layout.js';
@@ -49,27 +48,26 @@ const App: React.FC = () => {
             <Route path="/handle-open-api" element={<OpenApiPage />}></Route>
             <Route path="/handle-rest-api" element={<RestApiPage />}></Route>
             <Route path="/about" element={<About />}></Route>
+
+            <Suspense fallback={<div>Loading...</div>}>
+              {/* 그 외 라우팅 페이지 */}
+              {/* 카드 메뉴 */}
+              <Route path="/calendar" element={<MyCalendar />}></Route>
+              <Route path="/modal-example" element={<ModalExample />}></Route>
+              <Route path="/layer-example" element={<LayerExample />}></Route>
+              <Route path="/windowpop-example" element={<WindowPopExample />}></Route>
+              <Route path="/infinite-scroll-example" element={<InfiniteScrollExample />}></Route>
+              <Route path="/papago-api" element={<PapagoTransExample />}></Route>
+              {/* 방명록 */}
+              <Route path="/guestbook/write" element={<GuestBookWrite />}></Route>
+              <Route path="/guestbook/edit" element={<GuestBookEdit/>}></Route>
+              {/* 윈도우 팝업 */}
+              <Route path="/popup-view" element={<WindowPopup />}></Route>
+            </Suspense>
           </Route>
 
-          <Suspense fallback={<div>Loading...</div>}>
-            {/* 그 외 라우팅 페이지 */}
-            {/* 카드 메뉴 */}
-            <Route path="/calendar" element={<MyCalendar />}></Route>
-            <Route path="/modal-example" element={<ModalExample />}></Route>
-            <Route path="/layer-example" element={<LayerExample />}></Route>
-            <Route path="/windowpop-example" element={<WindowPopExample />}></Route>
-            <Route path="/infinite-scroll-example" element={<InfiniteScrollExample />}></Route>
-            <Route path="/papago-api" element={<PapagoTransExample />}></Route>
-            {/* 방명록 */}
-            <Route path="/guestbook/write" element={<GuestBookWrite />}></Route>
-            <Route path="/guestbook/edit" element={<GuestBookEdit/>}></Route>
-            {/* 윈도우 팝업 */}
-            <Route path="/popup-view" element={<WindowPopup />}></Route>
-          </Suspense>
-
-
           {/* 에러 */}
-          <Route path="*" element={<div><h1 style={{textAlign: 'center'}}>👩‍🌾 죄송합니다. 페이지가 현재 작업중이네요! 🥕</h1></div>}></Route>          
+          <Route path="*" element={<div><h1 style={{textAlign: 'center'}}>👩‍🌾 죄송합니다. 페이지가 현재 작업중이네요! 🥕</h1></div>}></Route> 
         </Routes>
       </BrowserRouter>
     </>
