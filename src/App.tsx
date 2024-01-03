@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Layout from './components/layout/Layout.js';
@@ -39,16 +39,17 @@ const App: React.FC = () => {
   return (
     <>
       <BrowserRouter basename="/">
-        <Routes>
+        <Suspense>
+          <Routes>
 
-          <Route path="/" element={<Layout />}>
-            {/* 상단 메뉴 */}
-            <Route index element={<Home />}></Route>
-            <Route path="/home" element={<Home />}></Route>
-            <Route path="/handle-open-api" element={<OpenApiPage />}></Route>
-            <Route path="/handle-rest-api" element={<RestApiPage />}></Route>
-            <Route path="/about" element={<About />}></Route>
-
+            <Route path="/" element={<Layout />}>
+              {/* 상단 메뉴 */}
+              <Route index element={<Home />}></Route>
+              <Route path="/home" element={<Home />}></Route>
+              <Route path="/handle-open-api" element={<OpenApiPage />}></Route>
+              <Route path="/handle-rest-api" element={<RestApiPage />}></Route>
+              <Route path="/about" element={<About />}></Route>
+              
 
               {/* 그 외 라우팅 페이지 */}
               {/* 카드 메뉴 */}
@@ -61,14 +62,15 @@ const App: React.FC = () => {
               {/* 방명록 */}
               <Route path="/guestbook/write" element={<GuestBookWrite />}></Route>
               <Route path="/guestbook/edit" element={<GuestBookEdit/>}></Route>
-              {/* 윈도우 팝업 */}
-              <Route path="/popup-view" element={<WindowPopup />}></Route>
+            </Route>
 
-          </Route>
+            {/* 윈도우 팝업 */}
+            <Route path="/popup-view" element={<WindowPopup />}></Route>
 
-          {/* 에러 */}
-          <Route path="*" element={<div><h1 style={{textAlign: 'center'}}>👩‍🌾 죄송합니다. 페이지가 현재 작업중이네요! 🥕</h1></div>}></Route> 
-        </Routes>
+            {/* 에러 */}
+            <Route path="*" element={<div><h1 style={{textAlign: 'center'}}>👩‍🌾 죄송합니다. 페이지가 현재 작업중이네요! 🥕</h1></div>}></Route> 
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </>
   );
