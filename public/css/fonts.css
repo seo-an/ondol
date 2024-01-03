@@ -101,7 +101,7 @@
 }
 
 /* default 폰트 스타일 정의 */
-@font-face {
+/* @font-face {
   font-family: 'seoanCocktailBomb';
   font-style: normal;
   font-weight: 200;
@@ -121,7 +121,7 @@
   font-weight: 700;
   src: local('seoanCocktailBomb'), url('../fonts/KoPubWorld Dotum Bold.woff2') format('woff2');
 	font-display: swap;
-}
+} */
 
 
 /*
