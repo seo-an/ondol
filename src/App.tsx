@@ -39,9 +39,8 @@ const App: React.FC = () => {
   return (
     <>
       <BrowserRouter basename="/">
-        <Suspense>
+        <Suspense fallback={<div>로딩 중 🐰 🥕 🥕 🥕</div>}>
           <Routes>
-
             <Route path="/" element={<Layout />}>
               {/* 상단 메뉴 */}
               <Route index element={<Home />}></Route>
