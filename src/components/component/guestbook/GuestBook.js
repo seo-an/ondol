@@ -66,7 +66,7 @@ const GuestBook = () => {
   const { data } = useGetFromDatabase(url, getQuery); // get 요청
   data.sort((a, b) => new Date(b.id) - new Date(a.id)); // 최신순으로 재정렬
   
-  const redering = (item) => {
+  const itemRenderer = (item) => {
     return (
       <div key={item.uniqueId} style={{ display: 'flex', flexWrap: 'nowrap', justifyContent: 'center' }}>
         <div className="letterMarker" style={{ display: 'flex', width: '16px', minHeight: '280px', margin: '16px 0px 16px 16px', borderTopLeftRadius: '4px', borderBottomLeftRadius: '4px', backgroundColor: '#d6d6d6' }}></div>
@@ -89,8 +89,59 @@ const GuestBook = () => {
       </div>
     );
   };
+
+
+  // {currentData()}
+  // </div>
+  // <div style={{ display: 'flex', width: '100%', margin: '2em 0 4em 0', justifyContent: 'center', alignItems: 'center' }}>
+  //   {Array.from({ length: maxPage }, (_, index) => index + 1).map(pageNumber => (
+  //     <button
+  //       key={pageNumber}
+  //       onClick={() => setCurrentPage(pageNumber)}
+  //       
+  //       disabled={pageNumber === currentPage}
+  //     >
+  //       {pageNumber}
+  //     </button>
+  //   ))}
+
+
+
+
+  // 
+  //   {Array.from({ length: maxPage }, (_, index) => index + 1).map(pageNumber => (
+  //     <button
+  //       key={pageNumber}
+  //       onClick={() => setCurrentPage(pageNumber)}
+  //       
+  //       disabled={pageNumber === currentPage}
+  //     >
+  //       {pageNumber}
+  //     </button>
+  //   ))}
+  // </div>
+
+  const buttonRenderer = (currentPage, setCurrentPage, startPageOfGroup, endPageOfGroup, isPrevGroupAvailable, isNextGroupAvailable, movePageGroup) => (
+    <>
+      <div style={{ display: 'flex', width: '100%', margin: '2em 0 4em 0', justifyContent: 'center', alignItems: 'center' }}>
+        {isPrevGroupAvailable && <button onClick={() => movePageGroup('prev')}>이전</button>}
+        {Array.from({ length: endPageOfGroup() - startPageOfGroup() + 1 }, (_, i) => startPageOfGroup() + i)
+          .map(page => (
+            <button
+              key={page}
+              onClick={() => setCurrentPage(page)}
+              disabled={page === currentPage}
+              style={{ margin: '0 5px', padding: '5px 10px', border: page === currentPage ? '2px solid lightsteelblue' : '1px solid #ddd' }}
+            >
+              {page}
+            </button>
+          ))}
+        {isNextGroupAvailable && <button onClick={() => movePageGroup('next')}>다음</button>}
+      </div>
+    </>
+  );
   
-  const { currentData, currentPage, setCurrentPage, maxPage } = usePagination(data, redering, 5);
+  const { renderData, renderButtons } = usePagination(data, itemRenderer, buttonRenderer, 5, 10);
   
   const passwordInput = useRef(null);
   const { deleteData } = useDeleteInDatabase(url); // 삭제
@@ -141,19 +192,8 @@ const GuestBook = () => {
       </div>
       {/* 페이지네이션 */}
       <div>
-        {currentData()}
-      </div>
-      <div style={{ display: 'flex', width: '100%', margin: '2em 0 4em 0', justifyContent: 'center', alignItems: 'center' }}>
-        {Array.from({ length: maxPage }, (_, index) => index + 1).map(pageNumber => (
-          <button
-            key={pageNumber}
-            onClick={() => setCurrentPage(pageNumber)}
-            style={{ margin: '0 5px', padding: '5px 10px', border: pageNumber === currentPage ? '2px solid blue' : '1px solid #ddd' }}
-            disabled={pageNumber === currentPage}
-          >
-            {pageNumber}
-          </button>
-        ))}
+        {renderData()}
+        {renderButtons()}
       </div>
       
       {isModalOpen && (
