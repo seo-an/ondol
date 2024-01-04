@@ -27,22 +27,29 @@ const useInfiniteScroll = ( initialData, render, per = 3 ) => {
   const redered = data.map((item, index) => render(item, index));
 
   useEffect(() => {
-    
     if (document.documentElement.scrollHeight === document.documentElement.clientHeight && hasMore) {
       loadMore();
     }
-    
+
     const handleScroll = () => {
-      
-      if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || !hasMore) {
+      // if (!hasMore || (window.innerHeight + document.documentElement.scrollTop) !== document.documentElement.offsetHeight) {
+      //   return;
+      // }
+
+      if (!hasMore || ((window.innerHeight + document.documentElement.scrollTop) <= document.documentElement.offsetHeight - 200)) {
         return;
       }
+      
       loadMore();
     };
 
     window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll);
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    }
   }, [loadMore, hasMore]);
 
   return { redered, hasMore };
