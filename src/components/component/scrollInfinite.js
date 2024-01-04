@@ -36,7 +36,7 @@ const useInfiniteScroll = ( initialData, render, per = 3 ) => {
       //   return;
       // }
 
-      if (!hasMore || ((window.innerHeight + document.documentElement.scrollTop) <= document.documentElement.offsetHeight - 200)) {
+      if (!hasMore || ((window.innerHeight + document.documentElement.scrollTop) <= document.documentElement.offsetHeight - 500)) {
         return;
       }
       
