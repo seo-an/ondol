@@ -156,11 +156,12 @@ const GuestBook = () => {
 
   const deleteItem = () => {
     const currentValue = passwordInput.current.value;
+    console.log('아이고??', currentValue, '|', selectedItem);
 
-    if (selectedItem.password == currentValue) {
-      deleteData(selectedItem);
+    if (currentValue.length === 0) {
+      alert('비밀번호를 입력해주세요.');
     } else {
-      alert('비밀번호가 다릅니다.');
+      deleteData(selectedItem, currentValue);
     }
     closeModal();
     // toggleClass();

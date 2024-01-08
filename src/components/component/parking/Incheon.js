@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import useRedirectOnRefresh from '../redirectOnRefresh.js';
 
 const useFetchData = () => {
   const [data, setData] = useState(['nothing']);
@@ -35,7 +36,7 @@ const useFetchData = () => {
     getData();
   }, []);
 
-  return { data };
+  return { data, getData };
 }
 
 
@@ -47,7 +48,7 @@ const Incheon = () => {
       <div>
         <div style={{ margin: '4em 0', textAlign: 'center' }}>
           <h1 style={{ margin: '1em 0' }}>인천공항 주차면적</h1>
-          <button onClick={getData} style={{ backgroundColor: 'transparent', border: '1px solid #333', borderRadius: '2px' }}>새로고침</button>
+          <button onClick={getData} style={{backgroundColor: 'transparent'}}>새로고침</button>
         </div>
         {(data === 'nothing') ? <p>데이터가 없습니다.</p> :
           <>

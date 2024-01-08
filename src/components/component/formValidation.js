@@ -50,3 +50,22 @@ const useFormSubmitValidation = ( validationRules ) => {
 };
 
 export default useFormSubmitValidation;
+
+// 사용
+// const { elements, validatedState, handleSubmit } = useFormSubmitValidation(validationRules);
+
+// parameter 형태
+// const validationRules = {
+//   username: [
+//     { validate: (value) => value.length !== 0, message: '이름을 입력해주세요.' }
+//   ],
+//   simple_password: [
+//     { validate: (value) => value.length !== 0, message: '패스워드를 입력해주세요.' }
+//   ],
+//   title: [
+//     { validate: (value) => value.length !== 0, message: '제목을 입력해주세요.' }
+//   ],
+//   comment: [
+//     { validate: (value) => value.length !== 0, message: '내용이 비어있습니다.' }
+//   ]
+// };

@@ -65,7 +65,6 @@ const postConnect = async function(res, pool, queryString) {
                 connection.release();
                 return;
             }
-
             res.status(200).send({
                 message: '200 OK',
                 data: 'post completed'
@@ -162,4 +161,29 @@ const putConnect = async function(res, pool, queryString) {
     }
 };
 
-export { pool, getConnect, postConnect, deleteConnect, putConnect };
+const serverConnect = async function(pool, queryString) {
+    return new Promise((resolve, reject) => {
+        pool.getConnection((err, connection) => {
+            if (err) {
+                console.error('! CAN NOT CONNECT TO DATABASE ::', err);
+                reject(new Error('Server error: Cannot connect to database'));
+                return;
+            }
+
+            console.info(`SUCCESS! Database connected`);
+
+            connection.query(queryString, (err, results) => {
+                connection.release();
+                if (err) {
+                    reject(new Error('Query execution error'));
+                    return;
+                }
+
+                resolve(results);
+            });
+        });
+    });
+};
+
+
+export { pool, getConnect, postConnect, deleteConnect, putConnect, serverConnect };

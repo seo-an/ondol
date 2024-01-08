@@ -6,12 +6,12 @@ const usePostToDatabase = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const postData = async (url, data) => {
-    // console.log('in postData::', url, data, JSON.stringify(data));
+    console.log('in postData::', url, data, JSON.stringify(data));
 
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch(url, {
+      const response = await fetch(`${url}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

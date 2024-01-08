@@ -4,14 +4,14 @@ const useDeleteInDatabase = (url) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-	const deleteData = async (data) => {
+	const deleteData = async (data, inputPassword) => {
 		setIsLoading(true);
 		setError(null);
 
 		if (!data) return;
 
 		const id = data.id;
-		const password = data.password;
+		const password = inputPassword;
 
 		try {
 			const response = await fetch(`${url}/${id}`, {

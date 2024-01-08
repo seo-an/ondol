@@ -50,3 +50,12 @@ const usePagination = (data, dataRenderer, buttonRenderer, itemsPerPage = 10, pa
 };
 
 export default usePagination;
+
+// 사용
+// const { renderData, renderButtons } = usePagination(json 데이터, item 렌더링 jsx, button 렌더링 jsx, 페이지 당 아이템 수, 페이지네이션 아이템 수);
+
+// jsx
+{/* <div>
+  {renderData()}
+  {renderButtons()}
+</div> */}

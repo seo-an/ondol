@@ -46,7 +46,7 @@ const useFetchData = () => {
 //     getData();
 //   }, []);
 
-//   return { data };
+//   return { data, getData };
 }
 
 
