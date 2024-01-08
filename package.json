@@ -1,7 +1,7 @@
 {
   "name": "ondol",
-  "version": "2.2.0",
-  "description": "페이지네이션 수정",
+  "version": "2.3.0",
+  "description": "비밀번호 암호화",
   "type": "module",
   "scripts": {
     "check": "tsc --noEmit",
