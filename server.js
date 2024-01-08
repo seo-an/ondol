@@ -163,21 +163,66 @@ app.delete('/api/guestbook/data/:id', async (req, res) => {
 
 
 // put to database
-app.put('/api/guestbook/data/:id', (req, res) => {
-  // console.log('😤', req.params, req.body);
+// app.put('/api/guestbook/data/:id', (req, res) => {
+//   // console.log('😤', req.params, req.body);
+  
+//   const uniqueId = req.params.id;
+//   const username = req.body.modifiedUsername;
+//   const title = req.body.modifiedTitle;
+//   const comment = req.body.modifiedComment;
+
+//   const PUT_DATA = `
+//     UPDATE ${envSetting.API_INPUT_DATA_TO_THIS_TABLE}
+//     SET name = '${username}', title = '${title}', comment = '${comment}'
+//     WHERE uniqueId = '${uniqueId}'
+//   `;
+
+//   putConnect(res, dbConnection, PUT_DATA);
+// });
+app.put('/api/guestbook/data/:id', async (req, res) => {
+  console.log('😤', req.params, req.body);
   
   const uniqueId = req.params.id;
   const username = req.body.modifiedUsername;
   const title = req.body.modifiedTitle;
   const comment = req.body.modifiedComment;
+  const password = req.body.password;
 
-  const PUT_DATA = `
-    UPDATE ${envSetting.API_INPUT_DATA_TO_THIS_TABLE}
-    SET name = '${username}', title = '${title}', comment = '${comment}'
-    WHERE uniqueId = '${uniqueId}'
-  `
+  const FIND_USER_QUERY = `SELECT simple_password FROM ${envSetting.API_INPUT_DATA_TO_THIS_TABLE} WHERE uniqueId = '${uniqueId}'`;
 
-  putConnect(res, dbConnection, PUT_DATA);
+  try {
+    const user = await serverConnect(dbConnection, FIND_USER_QUERY);
+    
+    if (user.length === 0) {
+      res.status(404).send({
+        message: '사용자를 찾을 수 없습니다.'
+      });
+      return;
+    }
+
+    const hashedPassword = user[0].simple_password;
+    // 입력된 비밀번호와 해시된 비밀번호를 비교
+    // bcrypt를 사용하여 비밀번호 확인
+    const isMatch = await bcrypt.compare(password, hashedPassword);
+    
+    if (!isMatch) {
+      return res.status(401).send('비밀번호가 틀렸습니다.');
+    }
+
+    // 비밀번호가 일치하는 경우, 데이터 삭제 처리
+    const PUT_DATA = `
+      UPDATE ${envSetting.API_INPUT_DATA_TO_THIS_TABLE}
+      SET name = '${username}', title = '${title}', comment = '${comment}'
+      WHERE uniqueId = '${uniqueId}'
+    `;
+    putConnect(res, dbConnection, PUT_DATA);
+  } catch (err) {
+    console.error('! CAN NOT CONNECT TO DATABASE ::', err);
+    res.status(500).send({
+      message: 'Server error : can not connect to database',
+      data: err
+    });
+  }
 });
 
 

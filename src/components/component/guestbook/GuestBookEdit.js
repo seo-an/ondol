@@ -3,8 +3,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import useGetFromDatabase from "../database-api/get.js";
 import useRedirectOnRefresh from "../redirectOnRefresh.js";
 import usePutToDatabase from "../database-api/put.js";
+import useManageModalState from "../popupModal.js";
 
 const GuestBookEdit = () => {
+  const { isModalOpen, openModal, closeModal } = useManageModalState();
 	const { redirectOnRefresh } = useRedirectOnRefresh();
 	redirectOnRefresh();
 
@@ -30,7 +32,7 @@ const GuestBookEdit = () => {
   const [title, setTitle] = useState('');
   const [comment, setComment] = useState('');
 
-  const [password, setPassword] = useState(''); // pw 검증
+  const [modified, setModified] = useState({}); // 수정 데이터
 
 
   useEffect(() => {
@@ -39,13 +41,14 @@ const GuestBookEdit = () => {
       setUsername(item.name);
       setTitle(item.title);
       setComment(item.comment);
-      setPassword(item.password);
+      // setPassword(item.password);
     }
   }, [data]);
   
   const nameBinding = useRef(null);
   const titleBiding = useRef(null);
   const commentBinding = useRef(null);
+  const passwordInput = useRef(null);
 
   const { putData } = usePutToDatabase();
 
@@ -57,18 +60,34 @@ const GuestBookEdit = () => {
 
     if (mu === username && mt === title && mc === comment) {
       alert('수정사항이 없습니다.');
+    } else {
+      const putting = {
+        id: id,
+        username: mu,
+        title: mt,
+        comment: mc
+      }
+
+      setModified(putting);
+      openModal();
     }
+
+    // putData(url, putting);
+    // setTimeout(navigateToPage, 1100);
+  };
+
+  const handleConfirm = () => {
+    const currentValue = passwordInput.current.value;
 
     const putting = {
-      id: id,
-      username: mu,
-      title: mt,
-      comment: mc
-    }
+      ...modified,
+      password: currentValue
+    };
 
     putData(url, putting);
-    setTimeout(navigateToPage, 1100);
-  }
+    setTimeout(closeModal, 1000);
+    // setTimeout(navigateToPage, 1100);
+  } 
 
   return (
     <>
@@ -98,6 +117,16 @@ const GuestBookEdit = () => {
 				</div>
 				</form>
 			</div>
+
+      {isModalOpen && (
+        <div style={{ position: 'fixed', top: '0', left: '0', width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: '1000' }}>
+          <div style={{ padding: '16px', backgroundColor: 'white', borderRadius: '2px' }}>
+            <input type="text" ref={passwordInput} />
+            <button onClick={handleConfirm}>확인</button>
+            <button onClick={closeModal}>닫기</button>
+          </div>
+        </div>
+      )}
 		</>
 	);
 

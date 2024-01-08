@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 const usePutToDatabase = () => {
-  const [response, setResponse] = useState(null);
+  const [status, setStatus] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -13,7 +13,8 @@ const usePutToDatabase = () => {
 		const modifiedData = {
 			modifiedUsername: data.username,
 			modifiedTitle: data.title,
-			modifiedComment: data.comment
+			modifiedComment: data.comment,
+			password: data.password
 		};
 
 		try {
@@ -25,23 +26,28 @@ const usePutToDatabase = () => {
 				body: JSON.stringify(modifiedData),
 			});
 
-				if (!response.ok) {
-					throw new Error(`HTTP PUT ERROR :: status ${response.status}`);
-				} else {
-					const result = await response.json();
-
-					alert('데이터가 성공적으로 업데이트되었습니다.');
-					setResponse(result);
-				}
-			} catch (error) {
-				console.error('PUT || CAN NOT TRY TO FETCH :: ', error);
-				setError(error);
-			} finally {
-				setIsLoading(false);
+			if (response.status === 401) {
+				alert('비밀번호가 다릅니다.');
+				setStatus(response.status);
 			}
-		};
 
-  return { putData, response, error, isLoading };
+			if (!response.ok) {
+				throw new Error(`HTTP PUT ERROR :: status ${response.status}`);
+			}
+
+			const result = await response.json();
+
+			alert('데이터가 성공적으로 업데이트되었습니다.');
+			setStatus(result);
+		} catch (error) {
+			console.error('PUT || CAN NOT TRY TO FETCH :: ', error);
+			setError(error);
+		} finally {
+			setIsLoading(false);
+		}
+	};
+
+  return { putData, status, error, isLoading };
 };
 
 export default usePutToDatabase;
